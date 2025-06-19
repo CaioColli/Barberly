@@ -7,6 +7,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+    font-family: azonix;
+    src: url('/fonts/Azonix.otf');
+}
+
+@font-face {
+    font-family: bebas;
+    src: url('/fonts/BebasKai.otf');
+}
+
 @theme {
     --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -77,7 +87,26 @@
     }
 }
 
+@layer utilities {
+    .font-azonix {
+        font-family: azonix, sans-serif;
+    }
+}
+
+body {
+    font-family: bebas;
+}
+
 :root {
+    /*  */
+    --custom-orange: #DD5500;
+    --custom-white: #FFFFFF;
+    --custom-middle-white: #F5F5F5;
+    --custom-gray: #D8D8D8;
+    --custom-dark-gray: #969696;
+    --custom-black: #161616;
+    --custom-black-bg: #282828;
+    /*  */
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
