@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AuthLayout from '@/layouts/auth-layout';
+import { AuthLayout } from '@/layouts/teste-auth-layout';
 
 type LoginForm = {
     email: string;
@@ -36,13 +36,13 @@ export default function Login({ status, canResetPassword }: LoginProps) {
     };
 
     return (
-        <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
-            <Head title="Log in" />
+        <AuthLayout title='Bem vindo de volta! faça seu login para prosseguir' span='Faça login agora mesmo.'>
+            <Head title="Barberly - Login" />
 
-            <form className="flex flex-col gap-6" onSubmit={submit}>
-                <div className="grid gap-6">
-                    <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
+            <form className='flex-1 flex flex-col justify-between py-[48px] px-[24px]' onSubmit={submit}>
+                <div className="flex flex-col gap-[24px]">
+                    <div className="flex flex-col gap-[8px]">
+                        <Label htmlFor="email">E-mail</Label>
                         <Input
                             id="email"
                             type="email"
@@ -52,19 +52,14 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                             autoComplete="email"
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
-                            placeholder="email@example.com"
+                            placeholder="Digite seu e-mail"
                         />
                         <InputError message={errors.email} />
                     </div>
 
-                    <div className="grid gap-2">
-                        <div className="flex items-center">
+                    <div className="flex flex-col gap-[8px]">
+                        <div className="">
                             <Label htmlFor="password">Password</Label>
-                            {canResetPassword && (
-                                <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
-                                    Forgot password?
-                                </TextLink>
-                            )}
                         </div>
                         <Input
                             id="password"
@@ -79,7 +74,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         <InputError message={errors.password} />
                     </div>
 
-                    <div className="flex items-center space-x-3">
+                    <div className="flex gap-[8px] items-center">
                         <Checkbox
                             id="remember"
                             name="remember"
@@ -87,20 +82,26 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                             onClick={() => setData('remember', !data.remember)}
                             tabIndex={3}
                         />
-                        <Label htmlFor="remember">Remember me</Label>
+                        <Label className='text-[var(--custom-black)] text-lg cursor-pointer' htmlFor="remember">Lembrar de mim</Label>
                     </div>
-
-                    <Button type="submit" className="mt-4 w-full" tabIndex={4} disabled={processing}>
-                        {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                        Log in
-                    </Button>
                 </div>
 
-                <div className="text-center text-sm text-muted-foreground">
-                    Don't have an account?{' '}
+                <div className='flex justify-end items-center gap-[24px]'>
                     <TextLink href={route('register')} tabIndex={5}>
-                        Sign up
+                        Criar conta
                     </TextLink>
+
+                    {canResetPassword && (
+                        <TextLink href={route('password.request')} tabIndex={6}>
+                            Esqueci a senha
+                        </TextLink>
+                    )}
+
+                    <button type='submit' className='flex items-center gap-[4px] text-[var(--custom-middle-white)] text-xl bg-[var(--custom-black)] py-[8px] px-[16px] rounded-[8px] cursor-pointer' tabIndex={4} disabled={processing}>
+                        {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
+                        Fazer login
+                    </button>
+
                 </div>
             </form>
 

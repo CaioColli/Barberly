@@ -9,7 +9,7 @@ export default function Welcome() {
 
     return (
         <section className='bg-[var(--custom-black-bg)] min-h-screen h-full flex flex-col justify-between pt-[48px] px-[24px] lg:px-[32px]'>
-            <Head title="Welcome">
+            <Head title="Barberly">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
