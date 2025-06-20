@@ -4,16 +4,16 @@ import { IoLogoInstagram } from "react-icons/io5";
 export const Footer = () => {
     return (
         <footer className='w-full flex flex-col items-center py-[32px] gap-[16px] lg:flex-row lg:justify-between'>
-            <div>
+            <div className="text-[var(--custom-dark-gray)]">
                 <h1 className='text-[32px] font-azonix'>Barberly</h1>
-                <span className='text-lg text-[var(--custom-dark-gray)]'>
+                <span className='text-lg'>
                     Desenvolvido por Caio Colli
                 </span>
             </div>
 
             <div>
-                <nav className='flex flex-col gap-[16px] items-center lg:items-start'>
-                    <h2 className='text-[var(--custom-middle-white)] text-xl'>Nossas redes sociais</h2>
+                <nav className='flex flex-col gap-[16px] items-center lg:items-start text-third'>
+                    <h2 className='text-xl'>Nossas redes sociais</h2>
                     <ul className='flex gap-[16px]'>
                         <li> <FaTwitter /> </li>
                         <li> <FaFacebookSquare /> </li>

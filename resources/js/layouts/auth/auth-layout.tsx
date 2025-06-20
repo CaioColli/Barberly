@@ -9,8 +9,8 @@ interface AuthProps {
 export const AuthBodyLayout = ({ children, title, span }: AuthProps) => {
     return (
         <>
-            <section className="min-h-dvh flex flex-col items-center bg-[var(--custom-black-bg)]">
-                <header className="py-[64px] px-[24px] flex flex-col justify-start w-full">
+            <section className="min-h-dvh flex flex-col items-center bg-[var(--custom-black-bg)] px-[24px] lg:px-[32px]">
+                <header className="py-[64px] flex flex-col justify-start w-full">
                     <h1 className="text-[32px] lg:text-[48px] font-azonix max-w-[600px]">
                         {title}
                     </h1>

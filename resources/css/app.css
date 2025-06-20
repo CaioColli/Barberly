@@ -34,10 +34,10 @@
     --color-popover: var(--popover);
     --color-popover-foreground: var(--popover-foreground);
 
-    --color-primary: var(--primary);
+    /* --color-primary: var(--primary); */
     --color-primary-foreground: var(--primary-foreground);
 
-    --color-secondary: var(--secondary);
+    /* --color-secondary: var(--secondary); */
     --color-secondary-foreground: var(--secondary-foreground);
 
     --color-muted: var(--muted);
@@ -67,6 +67,32 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+
+    /* TEXTO */
+
+    /* 
+        1. Modo claro
+        2. Modo escuro
+    */
+
+    /* preto - branco */
+    --color-primary: var(--primary);
+    /* branco - preto */
+    --color-secondary: var(--secondary);
+    /* branco - cinza claro */
+    --color-third: var(--third);
+
+    /* BOTÃO */
+
+    /* preto - branco */
+    --color-primary-button: var(--primary-button);
+
+    /* Background */
+
+    /* preto - branco */
+    --color-background-primary: var(--background-primary);
+    /* branco - cinza */
+    --color-background-secondary: var(--background-secondary);
 }
 
 /*
@@ -99,14 +125,28 @@ body {
 
 :root {
     /*  */
-    --custom-orange: #DD5500;
-    --custom-white: #FFFFFF;
-    --custom-middle-white: #F5F5F5;
-    --custom-gray: #D8D8D8;
+    --custom-orange: #dd5500;
+    --custom-white: #ffffff;
+    --custom-middle-white: #f5f5f5;
+    --custom-gray: #d8d8d8;
     --custom-dark-gray: #969696;
     --custom-black: #161616;
     --custom-black-bg: #282828;
+    --custom-white-bg: #FEFEFE;
+
+    /* TEXTO */
+    --primary: var(--custom-black);
+    --secondary: var(--custom-middle-white);
+    --third: var(--custom-black);
     /*  */
+
+    /* BOTÃO */
+    --primary-button: #161616;
+
+    /* BACKGROUND */
+    --background-primary: var(--custom-white-bg);
+    --background-secondary: var(--custom-white-bg);
+
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
@@ -143,6 +183,18 @@ body {
 }
 
 .dark {
+    /* TEXTO */
+    --primary: var(--custom-middle-white);
+    --secondary: var(--custom-black);
+    --third: var(--custom-gray);
+
+    /* BOTÃO */
+    --primary-button: #ffffff;
+
+    /* BACKGROUND */
+    --background-primary: var(--custom-black-bg);
+    --background-secondary: var(--custom-gray);
+
     --background: oklch(0.145 0 0);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.145 0 0);
