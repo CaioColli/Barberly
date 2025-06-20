@@ -24,7 +24,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
 
     return (
         <AuthLayout title="Recupere sua senha para continuar aproveitando" span="Recupere sua senha para continuar aproveitando">
-            <Head title="Forgot password" />
+            <Head title="Barberly - Recuper Conta" />
 
             <FormLayout onSubmit={submit}>
                 <div className="grid gap-2">
