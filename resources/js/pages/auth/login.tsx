@@ -4,11 +4,12 @@ import { FormEventHandler } from 'react';
 
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
-import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { AuthLayout } from '@/layouts/teste-auth-layout';
+import { FormLayout } from '@/layouts/form-layout';
+import { Button } from '@/components/ui/teste.button';
 
 type LoginForm = {
     email: string;
@@ -39,7 +40,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
         <AuthLayout title='Bem vindo de volta! faça seu login para prosseguir' span='Faça login agora mesmo.'>
             <Head title="Barberly - Login" />
 
-            <form className='flex-1 flex flex-col justify-between py-[48px] px-[24px]' onSubmit={submit}>
+            <FormLayout onSubmit={submit}>
                 <div className="flex flex-col gap-[24px]">
                     <div className="flex flex-col gap-[8px]">
                         <Label htmlFor="email">E-mail</Label>
@@ -97,13 +98,12 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         </TextLink>
                     )}
 
-                    <button type='submit' className='flex items-center gap-[4px] text-[var(--custom-middle-white)] text-xl bg-[var(--custom-black)] py-[8px] px-[16px] rounded-[8px] cursor-pointer' tabIndex={4} disabled={processing}>
+                    <Button type='submit' tabIndex={4} disabled={processing}>
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                         Fazer login
-                    </button>
-
+                    </Button>
                 </div>
-            </form>
+            </FormLayout>
 
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
         </AuthLayout>
