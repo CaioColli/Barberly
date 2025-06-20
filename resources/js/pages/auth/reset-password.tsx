@@ -40,7 +40,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
         <AuthLayout title="Agora precisamos de uma senha nova para recuperar seu acesso" span="Please enter your new password below">
             <Head title="Reset password" />
 
-            <FormLayout className='gap-[32px]' onSubmit={submit}>
+            <FormLayout onSubmit={submit}>
                 <div className="flex flex-col gap-[24px]">
                     <div className="flex flex-col gap-[8px]">
                         <Label htmlFor="email">E-mail</Label>

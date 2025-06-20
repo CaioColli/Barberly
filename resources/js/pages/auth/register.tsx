@@ -35,7 +35,7 @@ export default function Register() {
     return (
         <AuthLayout title="Finalize sua conta e aproveite todos os recursos" span="Crie sua conta agora mesmo.">
             <Head title="Barberly - Registrar" />
-            <FormLayout className='gap-[24px]' onSubmit={submit}>
+            <FormLayout onSubmit={submit}>
                 <div className="flex flex-col gap-[24px]">
                     <div className="flex flex-col gap-[8px]">
                         <Label htmlFor="name">Nome</Label>

@@ -1,3 +1,4 @@
+import { Footer } from '@/components/ui/footer';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
@@ -48,25 +49,7 @@ export default function Welcome() {
                 )}
             </main>
 
-            <footer className='w-full flex flex-col items-center py-[32px] gap-[16px] lg:flex-row lg:justify-between'>
-                <div>
-                    <h1 className='text-[32px] font-azonix'>Barberly</h1>
-                    <span className='text-lg text-[var(--custom-dark-gray)]'>
-                        Desenvolvido por Caio Colli
-                    </span>
-                </div>
-
-                <div>
-                    <nav className='flex flex-col gap-[16px] items-center lg:items-start'>
-                        <h2 className='text-[var(--custom-middle-white)] text-xl'>Nossas redes sociais</h2>
-                        <ul className='flex gap-[16px]'>
-                            <li> <FaTwitter /> </li>
-                            <li> <FaFacebookSquare /> </li>
-                            <li> <IoLogoInstagram /> </li>
-                        </ul>
-                    </nav>
-                </div>
-            </footer>
+            <Footer />
         </section>
     );
 }
