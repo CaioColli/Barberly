@@ -29,7 +29,7 @@ export default function Welcome() {
                 {auth.user ? (
                     <Link
                         href={route('dashboard')}
-                        className="text-[var(--custom-black)] text-xl bg-[var(--custom-white)] rounded-lg w-full text-center py-[8px]"
+                        className="text-xl bg-primary rounded-lg w-full text-center py-[8px] text-secondary"
                     >
                         Voltar ao ínicio
                     </Link>
@@ -41,7 +41,7 @@ export default function Welcome() {
 
                         <Link
                             href={route('login')}
-                            className="text-secondary text-xl bg-primary-button rounded-lg w-full text-center py-[8px]"
+                            className="text-secondary text-xl bg-primary rounded-lg w-full text-center py-[8px]"
                         >
                             Clique aqui
                         </Link>

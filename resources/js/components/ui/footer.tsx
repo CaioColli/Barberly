@@ -12,7 +12,7 @@ export const Footer = () => {
             </div>
 
             <div>
-                <nav className='flex flex-col gap-[16px] items-center lg:items-start text-third'>
+                <nav className='flex flex-col gap-[16px] items-center lg:items-start text-primary'>
                     <h2 className='text-xl'>Nossas redes sociais</h2>
                     <ul className='flex gap-[16px]'>
                         <li> <FaTwitter /> </li>

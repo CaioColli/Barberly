@@ -68,8 +68,6 @@
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
 
-    /* TEXTO */
-
     /* 
         1. Modo claro
         2. Modo escuro
@@ -81,11 +79,6 @@
     --color-secondary: var(--secondary);
     /* branco - cinza claro */
     --color-third: var(--third);
-
-    /* BOTÃO */
-
-    /* preto - branco */
-    --color-primary-button: var(--primary-button);
 
     /* Background */
 
@@ -143,9 +136,6 @@ body {
     --third: var(--custom-black);
     /*  */
 
-    /* BOTÃO */
-    --primary-button: #161616;
-
     /* BACKGROUND */
     --background-primary: var(--custom-white-bg);
     --background-secondary: var(--custom-white-bg);
@@ -191,9 +181,6 @@ body {
     --primary: var(--custom-middle-white);
     --secondary: var(--custom-black);
     --third: var();
-
-    /* BOTÃO */
-    --primary-button: #ffffff;
 
     /* BACKGROUND */
     --background-primary: var(--custom-black-bg);
