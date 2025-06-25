@@ -68,26 +68,16 @@
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
 
-    /* 
-        1. Modo claro
-        2. Modo escuro
-    */
-
-    /* FOI TESTADO POR ULTIMO EM ADMIN DASHBOARD */
-    /* branco - preto */
+    /* Text */
+    
     --color-primary: var(--primary);
-    /* preto - branco */
     --color-secondary: var(--secondary);
-    /* branco - cinza claro */
     --color-third: var(--third);
 
     /* Background */
 
-    /* preto - branco */
     --color-background-primary: var(--background-primary);
-    /* branco - cinza */
     --color-background-secondary: var(--background-secondary);
-    /* branco - cinza escuro */
     --color-background-third: var(--background-third);
 }
 
@@ -121,6 +111,7 @@ body {
 
 :root {
     /*  */
+    --custom-red: #ad0000;
     --custom-orange: #dd5500;
     --custom-white: #ffffff;
     --custom-middle-white: #f5f5f5;

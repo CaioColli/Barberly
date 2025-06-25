@@ -2,7 +2,6 @@ import { Breadcrumbs } from '@/components/breadcrumbs';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { type BreadcrumbItem as BreadcrumbItemType } from '@/types';
 import clsx from 'clsx';
-import { useState } from 'react';
 
 import { IoChevronBack } from "react-icons/io5";
 

@@ -1,1 +1,1 @@
-Tailwind, Inertia.js, Laravel, React Icons
+Tailwind, Inertia.js, Laravel, React Icons, clsx, material UI 
