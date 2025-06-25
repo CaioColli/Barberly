@@ -5,6 +5,10 @@ import Badge from '@mui/material/Badge';
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import { ptBR } from 'date-fns/locale';
 
+type CustomDayProps = PickersDayProps & {
+    out?: Date[];
+    few?: Date[];
+};
 
 const Calendar = () => {
     const rawOut = [
@@ -19,10 +23,9 @@ const Calendar = () => {
         { day: 12, month: 7, year: 2025 },
     ];
 
-    // Converte para objetos Date JS com mês zero-based
+    // Converte para objetos Date mês -1 (zero-based) 
     const out = rawOut.map(({ year, month, day }) => new Date(year, month - 1, day));
     const few = rawFew.map(({ year, month, day }) => new Date(year, month - 1, day));
-
 
     function isSameDay(d1: Date, d2: Date) {
         return (
@@ -32,7 +35,7 @@ const Calendar = () => {
         );
     }
 
-    function ServerDay(props: PickersDayProps & { out?: Date[], few?: Date[] }) {
+    function ServerDay(props: CustomDayProps) {
         const { out = [], few = [], day, outsideCurrentMonth, ...other } = props;
 
         const isOut = !outsideCurrentMonth && out.some(date => isSameDay(date, day));
@@ -71,8 +74,6 @@ const Calendar = () => {
         );
     }
 
-
-
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ptBR}>
             <DateCalendar
@@ -83,7 +84,7 @@ const Calendar = () => {
                     day: {
                         out,
                         few
-                    } as any,
+                    } as CustomDayProps,
                 }}
 
                 className='text-primary'
