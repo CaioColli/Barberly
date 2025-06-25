@@ -1,11 +1,20 @@
+import AppLayout from "@/layouts/app-layout";
+import { BreadcrumbItem } from "@/types";
+
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Barberly',
+        href: '',
+    }
+]
 
 const AdminDashboard = () => {
+    
+
     return (
-        <div className="h-screen bg-[#360000f]">
-            <h1 className="text-5x1 text-[#ffffff]">
-                Rota apenas para admin
-            </h1>
-        </div>
+        <AppLayout breadcrumbs={breadcrumbs} backBtnClassName="hidden" isAdmin={true}>
+            <></>
+        </AppLayout>
     )
 }
 

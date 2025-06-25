@@ -73,9 +73,10 @@
         2. Modo escuro
     */
 
-    /* preto - branco */
-    --color-primary: var(--primary);
+    /* FOI TESTADO POR ULTIMO EM ADMIN DASHBOARD */
     /* branco - preto */
+    --color-primary: var(--primary);
+    /* preto - branco */
     --color-secondary: var(--secondary);
     /* branco - cinza claro */
     --color-third: var(--third);

@@ -5,12 +5,19 @@ import { AppSidebarHeader } from '@/components/app-sidebar-header';
 import { type BreadcrumbItem } from '@/types';
 import { type PropsWithChildren } from 'react';
 
-export default function AppSidebarLayout({ children, breadcrumbs = [] }: PropsWithChildren<{ breadcrumbs?: BreadcrumbItem[] }>) {
+interface AppSidebarLayoutProps {
+    breadcrumbs?: PropsWithChildren<BreadcrumbItem[]>;
+    backBtnClassName?: string;
+    children: React.ReactNode;
+    isAdmin?: boolean
+}
+
+export default function AppSidebarLayout({ children, breadcrumbs = [], backBtnClassName, isAdmin }: AppSidebarLayoutProps) {
     return (
         <AppShell variant="sidebar">
             <AppSidebar />
-            <AppContent variant="sidebar" className="overflow-x-hidden">
-                <AppSidebarHeader breadcrumbs={breadcrumbs} />
+            <AppContent variant="sidebar" className="overflow-x-hidden bg-background-primary">
+                <AppSidebarHeader breadcrumbs={breadcrumbs} backBtnClassName={backBtnClassName} isAdmin={isAdmin} />
                 {children}
             </AppContent>
         </AppShell>
