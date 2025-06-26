@@ -12,10 +12,10 @@ type CustomDayProps = PickersDayProps & {
 
 const Calendar = () => {
     const rawOut = [
-        { day: 1, month: 6, year: 2025 },
         { day: 2, month: 6, year: 2025 },
         { day: 3, month: 6, year: 2025 },
-        { day: 30, month: 6, year: 2025 },
+        { day: 4, month: 6, year: 2025 },
+        { day: 5, month: 6, year: 2025 },
     ];
 
     const rawFew = [
@@ -23,6 +23,25 @@ const Calendar = () => {
         { day: 11, month: 7, year: 2025 },
         { day: 12, month: 7, year: 2025 },
     ];
+    
+    const rawClosed = [
+        { weekday: 'Domingo' },
+    ];
+
+    const closed = rawClosed.map((({ weekday }) => weekday));
+
+    const weekDayMap = {
+        'Domingo': 0,
+        'Segunda-feira': 1,
+        'Terça-feira': 2,
+        'Quarta-feira': 3,
+        'Quinta-feira': 4,
+        'Sexta-feira': 5,
+        'Sábado': 6 
+    } as { [key: string]: number };
+
+    // const disabledDays = closed.map(day => weekDayMap[day]);
+    const disabledDays = closed.map(day => weekDayMap[day]);
 
     const apparence = localStorage.getItem('appearance') as 'system' | 'light' | 'dark';
 
@@ -110,8 +129,15 @@ const Calendar = () => {
                 slots={{
                     day: ServerDay,
                 }}
+
+                shouldDisableDate={(date) => {
+                    return disabledDays.includes(date.getDay());
+                }}
+
+                // Estilização componentes internos / Marcações
                 slotProps={{
                     day: { out, few } as CustomDayProps,
+
                     calendarHeader: {
                         sx: {
                             display: 'flex',
@@ -147,6 +173,7 @@ const Calendar = () => {
                     }
                 }}
 
+                // Estilização componentes externos
                 sx={{
                     '& .MuiDayCalendar-weekDayLabel': {
                         color: apparence === 'dark' ? '#969696' : '#161616',
