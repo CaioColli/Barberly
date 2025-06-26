@@ -26,7 +26,7 @@ const AdminDashboard = () => {
                     <span className="text-[20px]">{formattedDate}</span>
                 </header>
 
-                <main className="mt-6">
+                <main className="mt-6 flex flex-col">
                     <h2 className="text-2xl text-[var(--custom-orange)]">Agenda</h2>
 
                     <Calendar />

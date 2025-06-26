@@ -15,6 +15,7 @@ const Calendar = () => {
         { day: 1, month: 6, year: 2025 },
         { day: 2, month: 6, year: 2025 },
         { day: 3, month: 6, year: 2025 },
+        { day: 30, month: 6, year: 2025 },
     ];
 
     const rawFew = [
@@ -23,7 +24,9 @@ const Calendar = () => {
         { day: 12, month: 7, year: 2025 },
     ];
 
-    // Converte para objetos Date mês -1 (zero-based) 
+    const apparence = localStorage.getItem('appearance') as 'system' | 'light' | 'dark';
+
+    // Converte para objetos Date mês -1 (sem isso janeiro começa com 0 e não 1) 
     const out = rawOut.map(({ year, month, day }) => new Date(year, month - 1, day));
     const few = rawFew.map(({ year, month, day }) => new Date(year, month - 1, day));
 
@@ -46,11 +49,14 @@ const Calendar = () => {
             badgeContent = (
                 <span
                     style={{
-                        width: 6,
-                        height: 6,
+                        width: 8,
+                        height: 8,
                         borderRadius: '50%',
                         backgroundColor: '#ad0000',
                         display: 'inline-block',
+                        position: 'absolute',
+                        right: '8px',
+                        top: '8px',
                     }}
                 />
             );
@@ -58,8 +64,8 @@ const Calendar = () => {
             badgeContent = (
                 <span
                     style={{
-                        width: 6,
-                        height: 6,
+                        width: 8,
+                        height: 8,
                         borderRadius: '50%',
                         backgroundColor: '#dd5500',
                         display: 'inline-block',
@@ -69,7 +75,31 @@ const Calendar = () => {
 
         return (
             <Badge key={day.toString()} overlap="circular" badgeContent={badgeContent}>
-                <PickersDay {...other} outsideCurrentMonth={outsideCurrentMonth} day={day} />
+                <PickersDay
+                    {...other}
+                    outsideCurrentMonth={outsideCurrentMonth}
+                    day={day}
+                    sx={{
+                        color: apparence === 'dark' ? '#969696' : '#161616',
+
+                        '&.MuiPickersDay-today': {
+                            color: apparence === 'dark' ? '#f5f5f5' : '#161616',
+                            border: 'none',
+                            background: 'rgb(150, 150, 150, 20%)',
+                        },
+
+                        '&.Mui-selected': {
+                            border: 'none',
+                            background: '#161616',
+                            color: '#f5f5f5'
+                        },
+
+                        '&.Mui-selected:focus': {
+                            background: '#161616'
+                        },
+
+                    }}
+                />
             </Badge>
         );
     }
@@ -81,13 +111,55 @@ const Calendar = () => {
                     day: ServerDay,
                 }}
                 slotProps={{
-                    day: {
-                        out,
-                        few
-                    } as CustomDayProps,
+                    day: { out, few } as CustomDayProps,
+                    calendarHeader: {
+                        sx: {
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            width: '100%',
+                            margin: '0',
+                            padding: '0',
+                            color: apparence === 'dark' ? '#969696' : '#161616'
+                        }
+                    },
+                    yearButton: {
+                        sx: {
+                            color: apparence === 'dark' ? '#969696' : '#161616'
+                        }
+                    },
+                    nextIconButton: {
+                        sx: {
+                            color: apparence === 'dark' ? '#969696' : '#161616',
+                            padding: '0',
+                            marginLeft: '8px'
+                        }
+                    },
+                    previousIconButton: {
+                        sx: {
+                            color: apparence === 'dark' ? '#969696' : '#161616',
+                            padding: '0'
+                        }
+                    },
+                    switchViewButton: {
+                        sx: {
+                            color: apparence === 'dark' ? '#969696' : '#161616'
+                        }
+                    }
                 }}
 
-                className='text-primary'
+                sx={{
+                    '& .MuiDayCalendar-weekDayLabel': {
+                        color: apparence === 'dark' ? '#969696' : '#161616',
+                        fontWeight: 'bold',
+                    },
+
+                    '&.MuiDateCalendar-root': {
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        margin: '0',
+                        width: 'fit-content',
+                    },
+                }}
             />
         </LocalizationProvider>
     )
