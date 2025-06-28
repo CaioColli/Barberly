@@ -26,7 +26,7 @@ class HandleUserTypeRequest
         if ($userType->user_type != 'admin') {
             return redirect()->route('dashboard');
         }
-        
+
         return $next($request);
     }
 }
