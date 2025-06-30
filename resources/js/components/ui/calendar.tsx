@@ -102,9 +102,7 @@ const Calendar = () => {
                         color: apparence === 'dark' ? '#969696' : '#161616',
 
                         '&.MuiPickersDay-today': {
-                            color: apparence === 'dark' ? '#f5f5f5' : '#161616',
                             border: 'none',
-                            background: 'rgb(150, 150, 150, 20%)',
                         },
 
                         '&.Mui-selected': {
@@ -128,6 +126,8 @@ const Calendar = () => {
             <DateCalendar
                 views={['day']}
 
+                defaultValue={new Date()}
+
                 slots={{
                     day: ServerDay,
                 }}
@@ -147,24 +147,19 @@ const Calendar = () => {
                             width: '100%',
                             margin: '0',
                             padding: '0',
-                            color: apparence === 'dark' ? '#969696' : '#161616'
-                        }
-                    },
-                    yearButton: {
-                        sx: {
-                            color: apparence === 'dark' ? '#969696' : '#161616'
+                            color: apparence === 'dark' ? '#f5f5f5' : '#161616'
                         }
                     },
                     nextIconButton: {
                         sx: {
-                            color: apparence === 'dark' ? '#969696' : '#161616',
+                            color: apparence === 'dark' ? '#f5f5f5' : '#161616',
                             padding: '0',
                             marginLeft: '8px'
                         }
                     },
                     previousIconButton: {
                         sx: {
-                            color: apparence === 'dark' ? '#969696' : '#161616',
+                            color: apparence === 'dark' ? '#f5f5f5' : '#161616',
                             padding: '0'
                         }
                     },

@@ -1,13 +1,14 @@
-import { usePage } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 
 import Calendar from "@/components/ui/calendar";
 import AppLayout from "@/layouts/app-layout";
 import { BreadcrumbItem } from "@/types";
+import { takeDate } from "@/helpers/takeDate";
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Barberly',
-        href: '',
+        href: '/admin/dashboard',
     }
 ]
 
@@ -23,19 +24,12 @@ interface AuthProps {
 const AdminDashboard = () => {
     const { auth } = usePage<AuthProps>().props
 
-    console.log(auth)
-
-    const date = new Date();
-    const formattedDate = date.toLocaleDateString('pt-BR', {
-        weekday: 'short',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-    })
+    takeDate();
 
     return (
         <AppLayout breadcrumbs={breadcrumbs} backBtnClassName="hidden" isAdmin={true}>
-            <section className="px-6">
+            <Head title="Painel Adm" />
+            <section className="px-6 lg:px-8">
                 <header className="flex flex-col gap-2 text-primary">
                     <h1 className="text-5xl">Painel administrativo</h1>
                     <h2 className="flex gap-1 text-2xl">Olá
@@ -43,7 +37,7 @@ const AdminDashboard = () => {
                             {auth.user.name}
                         </span>
                     </h2>
-                    <span className="text-[20px]">{formattedDate}</span>
+                    <span className="text-[20px]">{takeDate()}</span>
                 </header>
 
                 <main className="mt-6 flex flex-col">
