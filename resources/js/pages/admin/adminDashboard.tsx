@@ -47,9 +47,10 @@ const AdminDashboard = () => {
                 </header>
 
                 <main className="mt-6 flex flex-col">
-                    <h2 className="text-2xl text-[var(--custom-orange)]">Agenda</h2>
-
-                    <Calendar />
+                    <div className="flex flex-col gap-4 pb-4">
+                        <h2 className="text-2xl text-[var(--custom-orange)]">Agenda</h2>
+                        <Calendar />
+                    </div>
                 </main>
             </section>
         </AppLayout>

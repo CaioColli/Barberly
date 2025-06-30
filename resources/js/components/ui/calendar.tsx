@@ -126,6 +126,8 @@ const Calendar = () => {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ptBR}>
             <DateCalendar
+                views={['day']}
+
                 slots={{
                     day: ServerDay,
                 }}
@@ -181,11 +183,14 @@ const Calendar = () => {
                     },
 
                     '&.MuiDateCalendar-root': {
-                        display: 'flex',
-                        justifyContent: 'space-between',
                         margin: '0',
                         width: 'fit-content',
+                        maxHeight: 'fit-content',
                     },
+
+                    '& .MuiDayCalendar-slideTransition': {
+                        minHeight: '200px',
+                    }
                 }}
             />
         </LocalizationProvider>
