@@ -27,6 +27,8 @@ class HandleUserTypeRequest
             return redirect()->route('dashboard');
         }
 
+        Inertia::share('userType', $userType);
+
         return $next($request);
     }
 }

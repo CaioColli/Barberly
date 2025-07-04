@@ -24,7 +24,8 @@ interface AuthProps {
 }
 
 const AdminDashboard = () => {
-    const { auth } = usePage<AuthProps>().props
+    const { auth, userType } = usePage<AuthProps>().props
+
 
     takeDate();
 
@@ -53,32 +54,32 @@ const AdminDashboard = () => {
 
                     <ul className="flex flex-col gap-2">
                         <li>
-                            <Button className={fullWidth}>
-                                <Link href="/dashboard" as="button" className={fullWidth}>
+                            <Link href="/dashboard">
+                                <Button className={fullWidth}>
                                     Adicionar serviços
-                                </Link>
-                            </Button>
+                                </Button>
+                            </Link>
                         </li>
                         <li>
-                            <Button className={fullWidth}>
-                                <Link href="/dashboard" as="button" className={fullWidth}>
+                            <Link href="/dashboard">
+                                <Button className={fullWidth}>
                                     Editar serviços
-                                </Link>
-                            </Button>
+                                </Button>
+                            </Link>
                         </li>
                         <li>
-                            <Button className={fullWidth}>
-                                <Link href="/dashboard" as="button" className={fullWidth}>
+                            <Link href="/dashboard">
+                                <Button className={fullWidth}>
                                     Editar horários de serviço
-                                </Link>
-                            </Button>
+                                </Button>
+                            </Link>
                         </li>
                         <li>
-                            <Button className={fullWidth}>
-                                <Link href="/dashboard" as="button" className={fullWidth}>
+                            <Link href="/dashboard">
+                                <Button className={fullWidth}>
                                     Editar / Adicionar colaborador
-                                </Link>
-                            </Button>
+                                </Button>
+                            </Link>
                         </li>
                     </ul>
                 </main>

@@ -4,6 +4,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import Badge from '@mui/material/Badge';
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import { ptBR } from 'date-fns/locale';
+import { useState } from 'react';
 
 type CustomDayProps = PickersDayProps & {
     out?: Date[];
@@ -11,6 +12,8 @@ type CustomDayProps = PickersDayProps & {
 };
 
 const Calendar = () => {
+    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+
     const rawOut = [
         { day: 2, month: 6, year: 2025 },
         { day: 3, month: 6, year: 2025 },
@@ -127,7 +130,8 @@ const Calendar = () => {
                 <DateCalendar
                     views={['day']}
 
-                    defaultValue={new Date()}
+                    value={selectedDate}
+                    onChange={(date) => setSelectedDate(date)}
 
                     slots={{
                         day: ServerDay,
