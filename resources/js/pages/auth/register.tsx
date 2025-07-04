@@ -7,8 +7,8 @@ import TextLink from '@/components/text-link';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { AuthLayout } from '@/layouts/teste-auth-layout';
-import { FormLayout } from '@/layouts/form-layout';
 import { Button } from '@/components/ui/teste.button';
+import { Form } from '@/components/form';
 
 type RegisterForm = {
     name: string;
@@ -35,7 +35,7 @@ export default function Register() {
     return (
         <AuthLayout title="Finalize sua conta e aproveite todos os recursos" span="Crie sua conta agora mesmo.">
             <Head title="Barberly - Registrar" />
-            <FormLayout onSubmit={submit}>
+            <Form onSubmit={submit}>
                 <div className="flex flex-col gap-[24px]">
                     <div className="flex flex-col gap-[8px]">
                         <Label htmlFor="name">Nome</Label>
@@ -113,7 +113,7 @@ export default function Register() {
                         Criar conta
                     </Button>
                 </div>
-            </FormLayout>
+            </Form>
         </AuthLayout>
     );
 }

@@ -6,8 +6,8 @@ import InputError from '@/components/input-error';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { AuthLayout } from '@/layouts/teste-auth-layout';
-import { FormLayout } from '@/layouts/form-layout';
 import { Button } from '@/components/ui/teste.button';
+import { Form } from '@/components/form';
 
 interface ResetPasswordProps {
     token: string;
@@ -40,7 +40,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
         <AuthLayout title="Agora precisamos de uma senha nova para recuperar seu acesso" span="Please enter your new password below">
             <Head title="Reset password" />
 
-            <FormLayout onSubmit={submit}>
+            <Form onSubmit={submit}>
                 <div className="flex flex-col gap-[24px]">
                     <div className="flex flex-col gap-[8px]">
                         <Label htmlFor="email">E-mail</Label>
@@ -93,7 +93,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                     {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                     Trocar senha
                 </Button>
-            </FormLayout>
+            </Form>
         </AuthLayout>
     );
 }

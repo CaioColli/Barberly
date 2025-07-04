@@ -6,7 +6,7 @@ interface FormProps {
     onSubmit: (event: React.FormEvent) => void;
 }
 
-export const FormBodyLayout = ({ className, children, onSubmit }: FormProps ) => {
+export const Form = ({ className, children, onSubmit }: FormProps ) => {
     return (
         <form className={cn('flex flex-col gap-[32px]', className)} onSubmit={onSubmit}>
             {children}

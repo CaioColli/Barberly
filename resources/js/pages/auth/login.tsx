@@ -8,8 +8,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { AuthLayout } from '@/layouts/teste-auth-layout';
-import { FormLayout } from '@/layouts/form-layout';
 import { Button } from '@/components/ui/teste.button';
+import { Form } from '@/components/form';
 
 type LoginForm = {
     email: string;
@@ -40,7 +40,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
         <AuthLayout title='Bem vindo de volta! faça seu login para prosseguir' span='Faça login agora mesmo.'>
             <Head title="Barberly - Login" />
 
-            <FormLayout onSubmit={submit}>
+            <Form onSubmit={submit}>
                 <div className="flex flex-col gap-[24px]">
                     <div className="flex flex-col gap-[8px]">
                         <Label htmlFor="email">E-mail</Label>
@@ -103,7 +103,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         Fazer login
                     </Button>
                 </div>
-            </FormLayout>
+            </Form>
 
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
         </AuthLayout>

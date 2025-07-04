@@ -8,8 +8,8 @@ import TextLink from '@/components/text-link';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { AuthLayout } from '@/layouts/teste-auth-layout';
-import { FormLayout } from '@/layouts/form-layout';
 import { Button } from '@/components/ui/teste.button';
+import { Form } from '@/components/form';
 
 export default function ForgotPassword({ status }: { status?: string }) {
     const { data, setData, post, processing, errors } = useForm<Required<{ email: string }>>({
@@ -26,7 +26,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
         <AuthLayout title="Recupere sua senha para continuar aproveitando" span="Recupere sua senha para continuar aproveitando">
             <Head title="Barberly - Recuper Conta" />
 
-            <FormLayout onSubmit={submit}>
+            <Form onSubmit={submit}>
                 <div className="grid gap-2">
                     <Label htmlFor="email">E-mail</Label>
                     <Input
@@ -56,7 +56,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                     </Button>
                 </div>
 
-            </FormLayout>
+            </Form>
         </AuthLayout>
     );
 }
