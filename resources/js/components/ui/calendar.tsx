@@ -23,7 +23,7 @@ const Calendar = () => {
         { day: 11, month: 7, year: 2025 },
         { day: 12, month: 7, year: 2025 },
     ];
-    
+
     const rawClosed = [
         { weekday: 'Domingo' },
     ];
@@ -37,7 +37,7 @@ const Calendar = () => {
         'Quarta-feira': 3,
         'Quinta-feira': 4,
         'Sexta-feira': 5,
-        'Sábado': 6 
+        'Sábado': 6
     } as { [key: string]: number };
 
     // const disabledDays = closed.map(day => weekDayMap[day]);
@@ -122,73 +122,87 @@ const Calendar = () => {
     }
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ptBR}>
-            <DateCalendar
-                views={['day']}
+        <div>
+            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ptBR}>
+                <DateCalendar
+                    views={['day']}
 
-                defaultValue={new Date()}
+                    defaultValue={new Date()}
 
-                slots={{
-                    day: ServerDay,
-                }}
+                    slots={{
+                        day: ServerDay,
+                    }}
 
-                shouldDisableDate={(date) => {
-                    return disabledDays.includes(date.getDay());
-                }}
+                    shouldDisableDate={(date) => {
+                        return disabledDays.includes(date.getDay());
+                    }}
 
-                // Estilização componentes internos / Marcações
-                slotProps={{
-                    day: { out, few } as CustomDayProps,
+                    // Estilização componentes internos / Marcações
+                    slotProps={{
+                        day: { out, few } as CustomDayProps,
 
-                    calendarHeader: {
-                        sx: {
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            width: '100%',
+                        calendarHeader: {
+                            sx: {
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                width: '100%',
+                                margin: '0',
+                                padding: '0',
+                                color: apparence === 'dark' ? '#f5f5f5' : '#161616'
+                            }
+                        },
+                        nextIconButton: {
+                            sx: {
+                                color: apparence === 'dark' ? '#f5f5f5' : '#161616',
+                                padding: '0',
+                                marginLeft: '8px'
+                            }
+                        },
+                        previousIconButton: {
+                            sx: {
+                                color: apparence === 'dark' ? '#f5f5f5' : '#161616',
+                                padding: '0'
+                            }
+                        },
+                        switchViewButton: {
+                            sx: {
+                                color: apparence === 'dark' ? '#969696' : '#161616'
+                            }
+                        }
+                    }}
+
+                    // Estilização componentes externos
+                    sx={{
+                        '& .MuiDayCalendar-weekDayLabel': {
+                            color: apparence === 'dark' ? '#969696' : '#161616',
+                            fontWeight: 'bold',
+                        },
+
+                        '&.MuiDateCalendar-root': {
                             margin: '0',
-                            padding: '0',
-                            color: apparence === 'dark' ? '#f5f5f5' : '#161616'
-                        }
-                    },
-                    nextIconButton: {
-                        sx: {
-                            color: apparence === 'dark' ? '#f5f5f5' : '#161616',
-                            padding: '0',
-                            marginLeft: '8px'
-                        }
-                    },
-                    previousIconButton: {
-                        sx: {
-                            color: apparence === 'dark' ? '#f5f5f5' : '#161616',
-                            padding: '0'
-                        }
-                    },
-                    switchViewButton: {
-                        sx: {
-                            color: apparence === 'dark' ? '#969696' : '#161616'
-                        }
-                    }
-                }}
+                            width: 'fit-content',
+                            maxHeight: 'fit-content',
+                        },
 
-                // Estilização componentes externos
-                sx={{
-                    '& .MuiDayCalendar-weekDayLabel': {
-                        color: apparence === 'dark' ? '#969696' : '#161616',
-                        fontWeight: 'bold',
-                    },
+                        '& .MuiDayCalendar-slideTransition': {
+                            minHeight: '200px',
+                        }
+                    }}
+                />
+            </LocalizationProvider>
 
-                    '&.MuiDateCalendar-root': {
-                        margin: '0',
-                        width: 'fit-content',
-                        maxHeight: 'fit-content',
-                    },
+            <div className='flex gap-4'>
+                <div className='flex gap-2 items-center'>
+                    <span className='block w-2 h-2 bg-[var(--custom-orange)] rounded-4xl'></span>
+                    <span className='text-[14px]'>Poucos horários disponíveis</span>
+                </div>
 
-                    '& .MuiDayCalendar-slideTransition': {
-                        minHeight: '200px',
-                    }
-                }}
-            />
-        </LocalizationProvider>
+                <div className='flex gap-2 items-center'>
+                    <span className='block w-2 h-2 bg-[var(--custom-red)] rounded-4xl'></span>
+                    <span className='text-[14px]'>Sem horários disponíveis</span>
+                </div>
+            </div>
+        </div>
     )
 }
 

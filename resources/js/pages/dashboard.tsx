@@ -71,20 +71,7 @@ export default function Dashboard() {
 
                 {selectedGuide === 'agenda' && (
                     <form className='flex flex-col gap-4'>
-                        <div>
-                            <Calendar />
-                            <div className='flex gap-4'>
-                                <div className='flex gap-2 items-center'>
-                                    <span className='block w-2 h-2 bg-[var(--custom-orange)] rounded-4xl'></span>
-                                    <span className='text-[14px]'>Poucos horários disponíveis</span>
-                                </div>
-
-                                <div className='flex gap-2 items-center'>
-                                    <span className='block w-2 h-2 bg-[var(--custom-red)] rounded-4xl'></span>
-                                    <span className='text-[14px]'>Sem horários disponíveis</span>
-                                </div>
-                            </div>
-                        </div>
+                        <Calendar />
                         <h2 className='text-[20px]'>Horários disponíveis</h2>
                     </form>
 
