@@ -23,9 +23,15 @@ interface AuthProps {
     [key: string]: object;
 }
 
-const AdminDashboard = () => {
-    const { auth, userType } = usePage<AuthProps>().props
+interface UserTypeProps {
+    userType: {
+        user_type: string
+    }
+    [key: string]: object;
+}
 
+const AdminDashboard = () => {
+    const { auth, userType } = usePage<AuthProps & UserTypeProps>().props
 
     takeDate();
 
@@ -52,36 +58,38 @@ const AdminDashboard = () => {
                         <h2 className='text-[20px]'>Horários agendados</h2>
                     </div>
 
-                    <ul className="flex flex-col gap-2">
-                        <li>
-                            <Link href="/dashboard">
-                                <Button className={fullWidth}>
-                                    Adicionar serviços
-                                </Button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/dashboard">
-                                <Button className={fullWidth}>
-                                    Editar serviços
-                                </Button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/dashboard">
-                                <Button className={fullWidth}>
-                                    Editar horários de serviço
-                                </Button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/dashboard">
-                                <Button className={fullWidth}>
-                                    Editar / Adicionar colaborador
-                                </Button>
-                            </Link>
-                        </li>
-                    </ul>
+                    {userType.user_type === 'master' && (
+                        <ul className="flex flex-col gap-2">
+                            <li>
+                                <Link href="/admin/addService">
+                                    <Button className={fullWidth}>
+                                        Adicionar serviços
+                                    </Button>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/dashboard">
+                                    <Button className={fullWidth}>
+                                        Editar serviços
+                                    </Button>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/dashboard">
+                                    <Button className={fullWidth}>
+                                        Editar horários de serviço
+                                    </Button>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/dashboard">
+                                    <Button className={fullWidth}>
+                                        Editar / Adicionar colaborador
+                                    </Button>
+                                </Link>
+                            </li>
+                        </ul>
+                    )}
                 </main>
             </section>
 

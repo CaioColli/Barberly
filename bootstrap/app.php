@@ -2,7 +2,8 @@
 
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
-use App\Http\Middleware\HandleUserTypeRequest;
+use App\Http\Middleware\HandleAdminTypeRequest;
+use App\Http\Middleware\HandleMasterTypeRequest;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -24,7 +25,8 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->alias([
-            'admin' => HandleUserTypeRequest::class,
+            'barber' => HandleAdminTypeRequest::class,
+            'master' => HandleMasterTypeRequest::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

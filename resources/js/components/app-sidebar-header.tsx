@@ -17,7 +17,7 @@ export function AppSidebarHeader({ breadcrumbs = [], backBtnClassName, isAdmin =
     return (
         <header className="flex items-center justify-between w-full p-6">
             <div className='flex items-center gap-2'>
-                <IoChevronBack className={clsx('text-2xl', backBtnClassName)} />
+                <IoChevronBack className={clsx('text-2xl', backBtnClassName)} onClick={() => window.history.back()} />
                 <div className='flex items-center gap-2'>
                     <Breadcrumbs breadcrumbs={breadcrumbs} />
                     {isAdmin && (

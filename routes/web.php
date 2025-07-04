@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\UserType;
+use App\Http\Controllers\AdminAddService;
+use App\Http\Controllers\AdminDashboard;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -10,8 +11,12 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::prefix('admin')->middleware('admin')->group(function () {
-        Route::get('dashboard', [UserType::class, 'index'])->name('adminDashboard');
+    Route::prefix('admin')->middleware('barber')->group(function () {
+        Route::get('dashboard', [AdminDashboard::class, 'index'])->name('adminDashboard');
+    });
+
+    Route::prefix('admin')->middleware('master')->group(function () {
+        Route::get('addService', [AdminAddService::class, 'index'])->name('addService');
     });
 
     Route::get('dashboard', function () {

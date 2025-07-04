@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
 
-class HandleUserTypeRequest
+class HandleAdminTypeRequest
 {
     /**
      * Handle an incoming request.
@@ -23,7 +23,7 @@ class HandleUserTypeRequest
         
         $userType = UserType::where('user_id', $user->id)->first();
 
-        if ($userType->user_type != 'admin') {
+        if ($userType->user_type != 'barber' && $userType->user_type != 'master') {
             return redirect()->route('dashboard');
         }
 
