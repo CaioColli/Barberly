@@ -15,7 +15,7 @@ interface SideBarHeaderProps {
 export function AppSidebarHeader({ breadcrumbs = [], backBtnClassName, isAdmin = false }: SideBarHeaderProps) {
 
     return (
-        <header className="flex items-center justify-between w-full p-6">
+        <header className="flex items-center justify-between w-full p-6 lg:p-8">
             <div className='flex items-center gap-2'>
                 <IoChevronBack className={clsx('text-2xl', backBtnClassName)} onClick={() => window.history.back()} />
                 <div className='flex items-center gap-2'>
