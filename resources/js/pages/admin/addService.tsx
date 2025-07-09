@@ -1,6 +1,6 @@
 import { Head, useForm } from "@inertiajs/react"
 
-import React, { FormEventHandler, useRef, useState } from "react"
+import { FormEventHandler, useRef, useState } from "react"
 
 import { BreadcrumbItem } from "@/types"
 
@@ -16,6 +16,7 @@ import { LoaderCircle } from 'lucide-react';
 
 import { Button } from "@/components/ui/teste.button"
 import { FileInput } from "@/components/ui/fileInput"
+import { CurrencyInput } from "@/components/ui/currencyInput"
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -40,31 +41,11 @@ const AddService = () => {
     console.log(data);
 
     const [fileName, setFileName] = useState('');
-    const [displayValue, setDisplayValue] = useState('R$ 0,00');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
     }
-
-    const handleCurrencyFormat = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let input = e.target.value.replace(/\D/g, '');
-
-        // Divide em reais e centavos
-        let int = input.slice(0, input.length - 2);
-        let decimal = input.slice(-2);
-
-        // Formata milhar com ponto
-        let formattedInt = int.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
-        let final = `R$ ${formattedInt},${decimal}`;
-
-        setDisplayValue(final);
-
-        const value = parseFloat(int + '.' + decimal);
-
-        setData('value', value.toString());
-    };
 
     const handleDeleteFile = () => {
         setFileName('');
@@ -104,15 +85,11 @@ const AddService = () => {
                             <Label htmlFor="price">
                                 Preço do serviço
                             </Label>
-                            <Input
-                                type="text"
+                            <CurrencyInput 
+                                setData={setData}
                                 id="price"
-                                required
-                                autoFocus
-                                tabIndex={2}
-                                onChange={handleCurrencyFormat}
-                                value={displayValue}
-                                disabled={processing}
+                                index={2}
+                                processing={processing}
                             />
                         </div>
 
