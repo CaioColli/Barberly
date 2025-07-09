@@ -15,6 +15,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { LoaderCircle } from 'lucide-react';
 
 import { Button } from "@/components/ui/teste.button"
+import { FileInput } from "@/components/ui/fileInput"
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -35,6 +36,8 @@ const AddService = () => {
         value: '',
         path: ''
     });
+
+    console.log(data);
 
     const [fileName, setFileName] = useState('');
     const [displayValue, setDisplayValue] = useState('R$ 0,00');
@@ -73,20 +76,13 @@ const AddService = () => {
         }
     }
 
-    const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-
-        if (file) {
-            setFileName(file.name);
-        }
-    }
-
     return (
         <AppLayout breadcrumbs={breadcrumbs} isAdmin={true}>
             <Head title="Adicionar Serviço" />
             <FormLayout title="Adicionar novo serviço">
                 <Form onSubmit={submit}>
                     <div className="flex flex-col gap-6">
+                        {/* Name Input */}
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="name">
                                 Nome do serviço
@@ -103,6 +99,7 @@ const AddService = () => {
                             />
                         </div>
 
+                        {/* Price Input */}
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="price">
                                 Preço do serviço
@@ -119,25 +116,21 @@ const AddService = () => {
                             />
                         </div>
 
+                        {/* Image Input */}
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="image">
                                 Imagem do serviço
                             </Label>
                             <div className="bg-[#ffffff] rounded-[8px] border-[1px] border-[var(--custom-black)] shadow-[4px_5px_0_0_var(--custom-black)] relative">
-                                <Input
-                                    type="file"
-                                    id="image"
-                                    required
-                                    accept="image/png, image/jpeg, image/jpg"
-                                    className="w-full pt-12 pb-12 opacity-0"
-                                    autoFocus
-                                    tabIndex={3}
+                                <FileInput
                                     ref={fileInputRef}
+                                    index={3}
+                                    id="image"
                                     onChange={(e) => {
-                                        handleChangeFile(e);
                                         setData('path', e.target.value);
                                     }}
-                                    disabled={processing}
+                                    processing={processing}
+                                    setFileName={setFileName}
                                 />
 
                                 {fileName && (
