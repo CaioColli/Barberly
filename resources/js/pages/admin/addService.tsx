@@ -1,6 +1,6 @@
-import { Head } from "@inertiajs/react"
+import { Head, useForm } from "@inertiajs/react"
 
-import { FormEventHandler, useState } from "react"
+import React, { FormEventHandler, useRef, useState } from "react"
 
 import { BreadcrumbItem } from "@/types"
 
@@ -11,6 +11,9 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 
 import { FaFileImage } from "react-icons/fa";
+import { IoCloseOutline } from "react-icons/io5";
+import { LoaderCircle } from 'lucide-react';
+
 import { Button } from "@/components/ui/teste.button"
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -20,19 +23,61 @@ const breadcrumbs: BreadcrumbItem[] = [
     }
 ]
 
+type FormData = {
+    name: string,
+    value: string,
+    path: string
+}
+
 const AddService = () => {
-    const [file, setFile] = useState('Nenhum arquivo selecionado');
+    const { data, setData, post, processing } = useForm<FormData>({
+        name: '',
+        value: '',
+        path: ''
+    });
+
+    const [fileName, setFileName] = useState('');
+    const [displayValue, setDisplayValue] = useState('R$ 0,00');
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
+    }
+
+    const handleCurrencyFormat = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let input = e.target.value.replace(/\D/g, '');
+
+        // Divide em reais e centavos
+        let int = input.slice(0, input.length - 2);
+        let decimal = input.slice(-2);
+
+        // Formata milhar com ponto
+        let formattedInt = int.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+        let final = `R$ ${formattedInt},${decimal}`;
+
+        setDisplayValue(final);
+
+        const value = parseFloat(int + '.' + decimal);
+
+        setData('value', value.toString());
+    };
+
+    const handleDeleteFile = () => {
+        setFileName('');
+
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+
+            setData('path', '');
+        }
     }
 
     const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
 
         if (file) {
-            setFile(file.name);
-        } else {
-            setFile('Nenhum arquivo selecionado');
+            setFileName(file.name);
         }
     }
 
@@ -53,6 +98,8 @@ const AddService = () => {
                                 autoFocus
                                 tabIndex={1}
                                 placeholder="Digite seu novo serviço"
+                                onChange={e => setData('name', e.target.value)}
+                                disabled={processing}
                             />
                         </div>
 
@@ -61,12 +108,14 @@ const AddService = () => {
                                 Preço do serviço
                             </Label>
                             <Input
-                                type="number"
+                                type="text"
                                 id="price"
                                 required
                                 autoFocus
                                 tabIndex={2}
-                                placeholder="Digite o preço do serviço"
+                                onChange={handleCurrencyFormat}
+                                value={displayValue}
+                                disabled={processing}
                             />
                         </div>
 
@@ -81,18 +130,31 @@ const AddService = () => {
                                     required
                                     accept="image/png, image/jpeg, image/jpg"
                                     className="w-full pt-12 pb-12 opacity-0"
-                                    onChange={handleChangeFile}
+                                    autoFocus
+                                    tabIndex={3}
+                                    ref={fileInputRef}
+                                    onChange={(e) => {
+                                        handleChangeFile(e);
+                                        setData('path', e.target.value);
+                                    }}
+                                    disabled={processing}
                                 />
-                                <FaFileImage className="text-[var(--custom-black)] text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+
+                                {fileName && (
+                                    <IoCloseOutline className="text-[var(--custom-black)] text-4xl absolute top-0 right-0 cursor-pointer"
+                                        onClick={handleDeleteFile}
+                                    />
+                                )}
+
+                                <FaFileImage className="text-[var(--custom-black)] text-4xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
                                 <span className="text-[var(--custom-black)] absolute bottom-1 left-1/2 -translate-x-1/2 pointer-events-none w-full text-center">
-                                    {file}
+                                    {fileName}
                                 </span>
                             </div>
                         </div>
 
-                        <Button
-                            type="submit"
-                        >
+                        <Button type="submit">
+                            {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                             Cadastrar serviço
                         </Button>
                     </div>
