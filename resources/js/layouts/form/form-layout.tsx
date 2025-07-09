@@ -9,8 +9,8 @@ interface FormProps {
 export const FormBodyLayout = ({ children, title, span }: FormProps) => {
     return (
         <>
-            <section className="min-h-dvh flex flex-col items-center bg-background-primary px-[24px] lg:px-[32px]">
-                <header className="py-6 flex flex-col justify-start w-full text-primary">
+            <section className="min-h-dvh flex flex-col items-center bg-background-primary">
+                <header className="py-6 flex flex-col justify-start w-full text-primary px-[24px] lg:px-[32px]">
                     <h1 className="text-5xl">
                         {title}
                     </h1>
@@ -20,7 +20,7 @@ export const FormBodyLayout = ({ children, title, span }: FormProps) => {
                     </span>
                 </header>
 
-                <main className="w-screen lg:w-full bg-background-third flex-1 flex flex-col rounded-t-[16px] py-[48px] px-[24px] lg:px-[32px] relative">
+                <main className="w-full lg:w-full bg-background-third flex-1 flex flex-col rounded-t-[16px] py-[48px] px-[24px] lg:px-[32px] relative">
                     {children}
                 </main>
                 
