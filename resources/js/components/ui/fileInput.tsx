@@ -1,9 +1,7 @@
-import { useState } from "react"
-
 import { Input } from "./input"
 
 type Props = {
-    ref: any
+    ref: React.Ref<HTMLInputElement>
     processing: boolean
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     index: number

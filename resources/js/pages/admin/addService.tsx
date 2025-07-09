@@ -31,7 +31,7 @@ type FormData = {
 }
 
 const AddService = () => {
-    const { data, setData, post, processing } = useForm<FormData>({
+    const { data, setData, processing } = useForm<FormData>({
         name: '',
         value: '',
         path: ''
