@@ -1,1 +1,1 @@
-Tailwind, Inertia.js, Laravel, React Icons, clsx, material UI 
+Tailwind, Inertia.js, Laravel, React Icons, clsx, material UI, react-number-format

@@ -27,24 +27,34 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 type FormData = {
     name: string,
-    value: string,
-    path: string
+    price: string,
+    file: File | string
 }
 
 const AddService = () => {
-    const { data, setData, processing } = useForm<FormData>({
+    const { data, setData, post, processing, errors, reset } = useForm<FormData>({
         name: '',
-        value: '',
-        path: ''
+        price: '',
+        file: ''
     });
-
-    console.log(data);
 
     const [fileName, setFileName] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
+
+        post('/admin/addService', {
+            forceFormData: true,
+            onSuccess: () => {
+                handleDeleteFile();
+                reset();
+            },
+
+            onError: () => {
+                console.table(errors);
+            }
+        });
     }
 
     const handleDeleteFile = () => {
@@ -53,7 +63,7 @@ const AddService = () => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
 
-            setData('path', '');
+            setData('file', '');
         }
     }
 
@@ -73,11 +83,13 @@ const AddService = () => {
                                 id="name"
                                 required
                                 autoFocus
+                                value={data.name}
                                 tabIndex={1}
                                 placeholder="Digite seu novo serviço"
                                 onChange={e => setData('name', e.target.value)}
                                 disabled={processing}
                             />
+                            <span className="text-[16px] text-[var(--custom-red)]">{errors.name}</span>
                         </div>
 
                         {/* Price Input */}
@@ -85,12 +97,15 @@ const AddService = () => {
                             <Label htmlFor="price">
                                 Preço do serviço
                             </Label>
-                            <CurrencyInput 
+                            <CurrencyInput
                                 setData={setData}
                                 id="price"
+                                placeholder="digite o preço de seu novo serviço"
+                                value={data.price}
                                 index={2}
                                 processing={processing}
                             />
+                            <span className="text-[16px] text-[var(--custom-red)]">{errors.price}</span>
                         </div>
 
                         {/* Image Input */}
@@ -104,7 +119,11 @@ const AddService = () => {
                                     index={3}
                                     id="image"
                                     onChange={(e) => {
-                                        setData('path', e.target.value);
+                                        const file = e.target.files?.[0];
+
+                                        if (file) {
+                                            setData('file', file);
+                                        }
                                     }}
                                     processing={processing}
                                     setFileName={setFileName}
@@ -117,10 +136,18 @@ const AddService = () => {
                                 )}
 
                                 <FaFileImage className="text-[var(--custom-black)] text-4xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+
+                                {!fileName && (
+                                    <span className="text-[var(--custom-black)] absolute bottom-1 left-1/2 -translate-x-1/2 pointer-events-none w-full text-center">
+                                        Subir imagem
+                                    </span>
+                                )}
+
                                 <span className="text-[var(--custom-black)] absolute bottom-1 left-1/2 -translate-x-1/2 pointer-events-none w-full text-center">
                                     {fileName}
                                 </span>
                             </div>
+                            <span className="text-[16px] text-[var(--custom-red)]">{errors.file}</span>
                         </div>
 
                         <Button type="submit">

@@ -1,7 +1,7 @@
+import React from 'react'
 import { Input } from "./input"
 
 type Props = {
-    ref: React.Ref<HTMLInputElement>
     processing: boolean
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     index: number
@@ -9,31 +9,30 @@ type Props = {
     setFileName: (value: string) => void
 }
 
-export const FileInput = ({ ref, index, id, onChange, processing, setFileName }: Props) => {
+export const FileInput = React.forwardRef<HTMLInputElement, Props>(({ index, id, onChange, processing, setFileName }, ref) => {
+        const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+            const file = e.target.files?.[0];
+            if (file) {
+                setFileName(file.name);
+            }
+        };
 
-    const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-
-        if (file) {
-            setFileName(file.name);
-        }
+        return (
+            <Input
+                ref={ref}
+                type="file"
+                id={id}
+                required
+                accept="image/png, image/jpeg, image/jpg"
+                className="w-full pt-12 pb-12 opacity-0 cursor-pointer"
+                autoFocus
+                tabIndex={index}
+                onChange={(e) => {
+                    handleChangeFile(e);
+                    onChange(e);
+                }}
+                disabled={processing}
+            />
+        );
     }
-
-    return (
-        <Input
-            ref={ref}
-            type="file"
-            id={id}
-            required
-            accept="image/png, image/jpeg, image/jpg"
-            className="w-full pt-12 pb-12 opacity-0"
-            autoFocus
-            tabIndex={index}
-            onChange={(e) => {
-                handleChangeFile(e);
-                onChange(e);
-            }}
-            disabled={processing}
-        />
-    )
-}
+);

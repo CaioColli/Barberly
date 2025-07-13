@@ -1,45 +1,32 @@
-import { useState } from "react";
-
-import { Input } from "./input"
+import { NumericFormat } from 'react-number-format';
 
 type Props = {
     setData: (key: string, value: string) => void
     id: string
+    value: number | string
+    placeholder: string
     index: number
     processing: boolean
 }
 
-export const CurrencyInput = ({ setData, id, index, processing  }: Props) => {
-    const [displayValue, setDisplayValue] = useState('R$ 0,00');
-
-    const handleCurrencyFormat = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let input = e.target.value.replace(/\D/g, '');
-
-        // Divide em reais e centavos
-        let int = input.slice(0, input.length - 2);
-        let decimal = input.slice(-2);
-
-        let formattedInt = int.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
-        let final = `R$ ${formattedInt},${decimal}`;
-
-        setDisplayValue(final);
-
-        const value = parseFloat(int + '.' + decimal);
-
-        setData('value', value.toString());
-    };
-
+export const CurrencyInput = ({ setData, id, placeholder, index, processing, value }: Props) => {
     return (
-        <Input
-            type="text"
+        <NumericFormat
             id={id}
-            required
-            autoFocus
+            value={value}
+            placeholder={placeholder}
+            onValueChange={(values) => {
+                setData(id, values.floatValue?.toString() ?? '0');
+            }}
+            thousandSeparator="."
+            decimalSeparator=","
+            prefix="R$ "
+            decimalScale={2}
+            fixedDecimalScale
+            allowNegative={false}
             tabIndex={index}
-            onChange={handleCurrencyFormat}
-            value={displayValue}
             disabled={processing}
+            className='rounded-[8px] border-[1px] border-[var(--custom-black)] py-[8px] pl-[8px] text-[var(--custom-black)] placeholder:text-[var(--custom-gray)] shadow-[4px_5px_0_0_var(--custom-black)] outline-none focus:shadow-[6px_7px_0_0_var(--custom-black)] transition-all duration-200 bg-[#ffffff]'
         />
     )
 }
