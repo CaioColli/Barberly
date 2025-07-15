@@ -1,4 +1,4 @@
-import { usePage } from "@inertiajs/react"
+import { router, usePage } from "@inertiajs/react"
 
 import AppLayout from "@/layouts/app-layout"
 
@@ -26,8 +26,8 @@ interface Service {
 const Services = () => {
     const { services } = usePage().props as unknown as { services: Service[] }
 
-    const handleClickService = (item: any) => {
-        console.log(item);
+    const handleClickService = (item: number) => {
+        router.get(`/admin/service/${item}`);
     }
 
     return (

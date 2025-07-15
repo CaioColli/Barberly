@@ -54,7 +54,9 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        $service = Service::find($service->id);
+
+        return Inertia::render('admin/service')->with('service', $service);
     }
 
     /**

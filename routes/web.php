@@ -21,6 +21,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('addService', [ServiceController::class, 'store'])->name('addService');
 
         Route::get('services', [ServiceController::class, 'index'])->name('services');
+
+        Route::get('service/{service}', [ServiceController::class, 'show'])->name('service');
     });
 
     Route::get('dashboard', function () {
