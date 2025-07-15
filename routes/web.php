@@ -18,8 +18,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('admin')->middleware('master')->group(function () {
         Route::get('addService', [AdminAddService::class, 'index'])->name('addService');
-
         Route::post('addService', [ServiceController::class, 'store'])->name('addService');
+
+        Route::get('services', [ServiceController::class, 'index'])->name('services');
     });
 
     Route::get('dashboard', function () {

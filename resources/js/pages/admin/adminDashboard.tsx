@@ -68,7 +68,7 @@ const AdminDashboard = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/dashboard">
+                                <Link href="/admin/services">
                                     <Button className={fullWidth}>
                                         Editar serviços
                                     </Button>

@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceFormRequest;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ServiceController extends Controller
 {
@@ -14,7 +15,13 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::all()->map(function ($service) {
+            $service->path = asset('storage/' . $service->path);
+
+            return $service;
+        });
+
+        return Inertia::render('admin/services')->with('services', $services);
     }
 
     /**
@@ -31,7 +38,7 @@ class ServiceController extends Controller
     public function store(ServiceFormRequest $request)
     {
         $path = $request->file('file')->store('services/services_images', 'public');
-        
+
         Service::create([
             'name' => $request->name,
             'price' => $request->price,
