@@ -55,8 +55,16 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         $service = Service::find($service->id);
+        $service->path = asset('storage/' . $service->path);
 
         return Inertia::render('admin/service')->with('service', $service);
+
+
+        // $services = Service::all()->map(function ($service) {
+        //     $service->path = asset('storage/' . $service->path);
+
+        //     return $service;
+        // });
     }
 
     /**

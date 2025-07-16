@@ -39,8 +39,6 @@ const AddService = () => {
         file: ''
     });
 
-    console.log(data);
-
     const [fileName, setFileName] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
