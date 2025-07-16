@@ -17,6 +17,7 @@ import { LoaderCircle } from 'lucide-react';
 import { Button } from "@/components/ui/teste.button"
 import { FileInput } from "@/components/ui/fileInput"
 import { CurrencyInput } from "@/components/ui/currencyInput"
+import { deleteFile } from "@/helpers/deleteFile"
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -38,6 +39,8 @@ const AddService = () => {
         file: ''
     });
 
+    console.log(data);
+
     const [fileName, setFileName] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -58,13 +61,11 @@ const AddService = () => {
     }
 
     const handleDeleteFile = () => {
-        setFileName('');
-
-        if (fileInputRef.current) {
-            fileInputRef.current.value = '';
-
-            setData('file', '');
-        }
+        deleteFile({
+            setFileName,
+            fileInputRef,
+            setData
+        });
     }
 
     return (
