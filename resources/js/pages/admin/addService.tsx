@@ -124,6 +124,7 @@ const AddService = () => {
                                             setData('file', file);
                                         }
                                     }}
+                                    required
                                     processing={processing}
                                     setFileName={setFileName}
                                 />

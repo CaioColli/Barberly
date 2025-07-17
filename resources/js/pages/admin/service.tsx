@@ -73,7 +73,6 @@ const Service = () => {
                             <Input
                                 type="text"
                                 id="name"
-                                required
                                 autoFocus
                                 value={data.name}
                                 tabIndex={1}
@@ -148,15 +147,16 @@ const Service = () => {
                             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                             Cadastrar serviço
                         </Button>
+
+                        <Button
+                            type="submit"
+                            className="bg-[var(--custom-red)]"
+                        >
+                            Deletar serviço
+                        </Button>
                     </div>
                 </Form>
 
-                <Button
-                    type="submit"
-                    className="bg-[var(--custom-red)] mt-8"
-                >
-                    Deletar serviço
-                </Button>
             </FormLayout>
         </AppLayout>
     )

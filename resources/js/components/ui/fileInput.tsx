@@ -6,10 +6,11 @@ type Props = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     index: number
     id: string
+    required?: boolean
     setFileName: (value: string) => void
 }
 
-export const FileInput = React.forwardRef<HTMLInputElement, Props>(({ index, id, onChange, processing, setFileName }, ref) => {
+export const FileInput = React.forwardRef<HTMLInputElement, Props>(({ index, id, required = false, onChange, processing, setFileName }, ref) => {
         const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
             const file = e.target.files?.[0];
             if (file) {
@@ -22,7 +23,7 @@ export const FileInput = React.forwardRef<HTMLInputElement, Props>(({ index, id,
                 ref={ref}
                 type="file"
                 id={id}
-                required
+                required={required}
                 accept="image/png, image/jpeg, image/jpg"
                 className="w-full pt-12 pb-12 opacity-0 cursor-pointer"
                 autoFocus
