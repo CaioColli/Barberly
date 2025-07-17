@@ -45,7 +45,7 @@ class ServiceController extends Controller
             'path' => $path,
         ]);
 
-        // return true;
+        return to_route('services');
     }
 
 
@@ -58,13 +58,6 @@ class ServiceController extends Controller
         $service->path = asset('storage/' . $service->path);
 
         return Inertia::render('admin/service')->with('service', $service);
-
-
-        // $services = Service::all()->map(function ($service) {
-        //     $service->path = asset('storage/' . $service->path);
-
-        //     return $service;
-        // });
     }
 
     /**

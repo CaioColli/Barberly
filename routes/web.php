@@ -23,7 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('services', [ServiceController::class, 'index'])->name('services');
 
         Route::get('service/{service}', [ServiceController::class, 'show'])->name('service');
-        Route::delete('service/{service}', [ServiceController::class, 'destroy'])->name('service');
+        Route::delete('service/{service}', [ServiceController::class, 'destroy'])->name('serviceDelete');
     });
 
     Route::get('dashboard', function () {
