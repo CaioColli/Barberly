@@ -32,12 +32,12 @@ const Services = () => {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs} isAdmin={true}>
-            <main className="flex flex-col gap-6 px-6 lg:px-8">
+            <main className="flex flex-col gap-6 px-6 lg:px-8 h-full">
                 <h1 className="text-5xl text-primary">
                     Seus serviços
                 </h1>
 
-                <ul className="flex flex-col gap-4">
+                <ul className="flex flex-col lg:flex-row gap-4 lg:grid lg:grid-flow-col lg:grid-rows-2">
                     {services.map((service) => (
                         <button
                             key={service.id}
