@@ -32,10 +32,19 @@ const Services = () => {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs} isAdmin={true}>
-            <main className="flex flex-col gap-6 px-6 lg:px-8 h-full">
+            <main className="flex flex-col gap-6 px-6 lg:px-8 h-full relative">
                 <h1 className="text-5xl text-primary">
                     Seus serviços
                 </h1>
+
+                {services.length < 1 && (
+                    <div className="flex flex-col items-center h-full justify-center">
+                        <img src="/assets/illust_barber_guy_bad.png" alt="Foto do barbeiro" className='w-[200px] lg:w-[230px]' />
+                        <h2 className="text-3xl text-[var(--custom-orange)] text-center">
+                            Nenhum serviço cadastrado
+                        </h2>
+                    </div>
+                )}
 
                 <ul className="flex flex-col lg:flex-row gap-4 lg:grid lg:grid-flow-col lg:grid-rows-2">
                     {services.map((service) => (
