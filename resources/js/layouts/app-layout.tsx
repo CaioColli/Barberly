@@ -7,10 +7,11 @@ interface AppLayoutProps {
     breadcrumbs?: BreadcrumbItem[];
     backBtnClassName?: string;
     isAdmin?: boolean
+    backPage?: () => void
 }
 
-export default ({ children, breadcrumbs, backBtnClassName, isAdmin, ...props }: AppLayoutProps) => (
-    <AppLayoutTemplate breadcrumbs={breadcrumbs} backBtnClassName={backBtnClassName} isAdmin={isAdmin} {...props}>
+export default ({ children, breadcrumbs, backBtnClassName, isAdmin, backPage, ...props }: AppLayoutProps) => (
+    <AppLayoutTemplate breadcrumbs={breadcrumbs} backBtnClassName={backBtnClassName} isAdmin={isAdmin} backPage={backPage} {...props}>
         {children}
     </AppLayoutTemplate>
 );

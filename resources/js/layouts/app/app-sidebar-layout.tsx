@@ -10,14 +10,15 @@ interface AppSidebarLayoutProps {
     backBtnClassName?: string;
     children: React.ReactNode;
     isAdmin?: boolean
+    backPage?: () => void
 }
 
-export default function AppSidebarLayout({ children, breadcrumbs = [], backBtnClassName, isAdmin }: AppSidebarLayoutProps) {
+export default function AppSidebarLayout({ children, breadcrumbs = [], backBtnClassName, isAdmin, backPage }: AppSidebarLayoutProps) {
     return (
         <AppShell variant="sidebar">
             <AppSidebar />
             <AppContent variant="sidebar" className="overflow-x-hidden bg-background-primary">
-                <AppSidebarHeader breadcrumbs={breadcrumbs} backBtnClassName={backBtnClassName} isAdmin={isAdmin} />
+                <AppSidebarHeader breadcrumbs={breadcrumbs} backBtnClassName={backBtnClassName} isAdmin={isAdmin} backPage={backPage} />
                 {children}
             </AppContent>
         </AppShell>

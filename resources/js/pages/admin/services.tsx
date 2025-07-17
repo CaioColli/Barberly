@@ -31,7 +31,7 @@ const Services = () => {
     }
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs} isAdmin={true}>
+        <AppLayout breadcrumbs={breadcrumbs} isAdmin={true} backPage={() => router.get(route('adminDashboard'))}>
             <main className="flex flex-col gap-6 px-6 lg:px-8 h-full relative">
                 <h1 className="text-5xl text-primary">
                     Seus serviços
