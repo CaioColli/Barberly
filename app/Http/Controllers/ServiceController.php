@@ -88,6 +88,11 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $pathImage = $service->path;
+        unlink(public_path('storage/' . $pathImage));
+
+        $service->delete();
+
+        return to_route('services');
     }
 }

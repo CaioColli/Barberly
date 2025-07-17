@@ -36,7 +36,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 const Service = () => {
     const { service } = usePage().props as unknown as { service: Service }
 
-    const { data, setData, processing, errors } = useForm<FormData>({
+    const { data, setData, processing, errors, delete: destroy } = useForm<FormData>({
         name: '',
         price: '',
         file: ''
@@ -55,6 +55,10 @@ const Service = () => {
             fileInputRef,
             setData
         });
+    }
+
+    const handleDeleteService = (id: number) => {
+        destroy(`/admin/service/${id}`)
     }
 
     return (
@@ -151,6 +155,7 @@ const Service = () => {
                         <Button
                             type="submit"
                             className="bg-[var(--custom-red)]"
+                            onClick={() => handleDeleteService(service.id)}
                         >
                             Deletar serviço
                         </Button>
