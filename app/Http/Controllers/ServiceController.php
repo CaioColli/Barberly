@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreServiceRequest;
+use App\Http\Requests\UpdateServiceRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -63,17 +64,31 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Service $service)
+    public function edit(Request $service)
     {
-        
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Service $service)
+    public function update(UpdateServiceRequest $request, Service $service)
     {
-        //
+        $service->name = $request->name ?? $service->name;
+        $service->price = $request->price ?? $service->price;
+
+        if ($request->hasFile('file')) {
+            $path = $request->file('file')->store('services/services_images', 'public');
+
+            $pathImage = $service->path;
+            unlink(public_path('storage/' . $pathImage));
+
+            $service->path = $path;
+        }
+
+        $service->save();
+
+        return to_route('services');
     }
 
     /**

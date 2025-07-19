@@ -36,17 +36,30 @@ const breadcrumbs: BreadcrumbItem[] = [
 const Service = () => {
     const { service } = usePage().props as unknown as { service: Service }
 
-    const { data, setData, processing, errors, delete: destroy } = useForm<FormData>({
+    const { data, setData, post, processing, errors, delete: destroy, reset } = useForm<FormData>({
         name: '',
         price: '',
         file: ''
-    })
+    });
 
     const [fileName, setFileName] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
+
+        post(`/admin/service/${service.id}`, {
+            method: 'patch',
+            forceFormData: true,
+            onSuccess: () => {
+                handleDeleteFile();
+                reset();
+            },
+
+            onError: () => {
+                console.table(errors);
+            }
+        });
     }
 
     const handleDeleteFile = () => {
