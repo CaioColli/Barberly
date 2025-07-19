@@ -166,16 +166,16 @@ const Service = () => {
                             Cadastrar serviço
                         </Button>
 
-                        <Button
-                            type="submit"
-                            className="bg-[var(--custom-red)]"
-                            onClick={() => handleDeleteService(service.id)}
-                        >
-                            Deletar serviço
-                        </Button>
                     </div>
                 </Form>
 
+                <Button
+                    type="submit"
+                    className="bg-[var(--custom-red)] mt-8"
+                    onClick={() => handleDeleteService(service.id)}
+                >
+                    Deletar serviço
+                </Button>
             </FormLayout>
         </AppLayout>
     )
