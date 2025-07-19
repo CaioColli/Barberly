@@ -97,6 +97,7 @@ const Service = () => {
                                 onChange={e => setData('name', e.target.value)}
                                 disabled={processing}
                             />
+                            <span className="text-[16px] text-[var(--custom-red)]">{errors.name}</span>
                         </div>
 
                         {/* Price Input */}
