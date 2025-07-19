@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ServiceFormRequest;
+use App\Http\Requests\StoreServiceRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -35,7 +35,7 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ServiceFormRequest $request)
+    public function store(StoreServiceRequest $request)
     {
         $path = $request->file('file')->store('services/services_images', 'public');
 
@@ -65,7 +65,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        
     }
 
     /**
