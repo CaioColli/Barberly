@@ -61,30 +61,23 @@ const AdminDashboard = () => {
                     {userType.user_type === 'master' && (
                         <ul className="flex flex-col gap-2">
                             <li>
-                                <Link href="/admin/addService">
-                                    <Button className={fullWidth}>
-                                        Adicionar serviços
-                                    </Button>
-                                </Link>
-                            </li>
-                            <li>
                                 <Link href="/admin/services">
                                     <Button className={fullWidth}>
-                                        Editar serviços
+                                        Serviços
                                     </Button>
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/dashboard">
                                     <Button className={fullWidth}>
-                                        Adicionar ou Editar horários de serviço
+                                        Horários de serviço
                                     </Button>
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/dashboard">
                                     <Button className={fullWidth}>
-                                        Editar / Adicionar colaborador
+                                        Colaboradores
                                     </Button>
                                 </Link>
                             </li>

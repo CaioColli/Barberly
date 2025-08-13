@@ -1,4 +1,4 @@
-import { router, usePage } from "@inertiajs/react"
+import { Link, router, usePage } from "@inertiajs/react"
 
 import AppLayout from "@/layouts/app-layout"
 
@@ -8,6 +8,7 @@ import { BreadcrumbItem } from "@/types"
 
 import { CgArrowsExchange } from "react-icons/cg";
 import { Footer } from "@/components/ui/footer";
+import { Button } from "@/components/ui/button";
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -62,6 +63,12 @@ const Services = () => {
                         </button>
                     ))}
                 </ul>
+
+                <Link href="/admin/addService">
+                    <Button className={'p-6 w-full'}>
+                        Adicionar novo serviço
+                    </Button>
+                </Link>
             </main>
 
             <Footer />
