@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\Admin\CreateService;
 use App\Http\Controllers\Admin\Service;
+use App\Http\Controllers\Admin\OpeningHours;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -20,5 +21,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('service/{service}', [Service::class, 'show'])->name('service');
         Route::post('service/{service}', [Service::class, 'update'])->name('serviceUpdate');
         Route::delete('service/{service}', [Service::class, 'destroy'])->name('serviceDelete');
+
+        Route::prefix('openingHours')->group(function () {
+            Route::get('', [OpeningHours::class, 'index'])->name('openingHours'); 
+        });
     });
 });

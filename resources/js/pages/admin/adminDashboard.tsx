@@ -68,9 +68,9 @@ const AdminDashboard = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/dashboard">
+                                <Link href="/admin/openingHours">
                                     <Button className={fullWidth}>
-                                        Horários de serviço
+                                        Horários de funcionamento
                                     </Button>
                                 </Link>
                             </li>

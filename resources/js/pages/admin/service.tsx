@@ -171,7 +171,7 @@ const Service = () => {
 
                 <Button
                     type="submit"
-                    className="bg-[var(--custom-red)] mt-8"
+                    className="bg-[var(--custom-red)] mt-4"
                     onClick={() => handleDeleteService(service.id)}
                 >
                     Deletar serviço
