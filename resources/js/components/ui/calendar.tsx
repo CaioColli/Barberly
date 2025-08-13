@@ -189,7 +189,7 @@ const Calendar = () => {
                         },
 
                         '& .MuiDayCalendar-slideTransition': {
-                            minHeight: '200px',
+                            maxHeight: 'fit-content',
                         }
                     }}
                 />
