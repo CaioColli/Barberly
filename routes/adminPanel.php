@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\AdminAddService;
 use App\Http\Controllers\AdminDashboard;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\Admin\CreateService;
+use App\Http\Controllers\Admin\Service;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -13,13 +13,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::prefix('admin')->middleware('master')->group(function () {
-        Route::get('addService', [AdminAddService::class, 'index'])->name('addService');
-        Route::post('addService', [ServiceController::class, 'store'])->name('addService');
+        Route::get('addService', [CreateService::class, 'index'])->name('addService');
+        Route::post('addService', [CreateService::class, 'store'])->name('addService');
 
-        Route::get('services', [ServiceController::class, 'index'])->name('services');
-
-        Route::get('service/{service}', [ServiceController::class, 'show'])->name('service');
-        Route::post('service/{service}', [ServiceController::class, 'update'])->name('serviceUpdate');
-        Route::delete('service/{service}', [ServiceController::class, 'destroy'])->name('serviceDelete');
+        Route::get('services', [Service::class, 'index'])->name('services');
+        Route::get('service/{service}', [Service::class, 'show'])->name('service');
+        Route::post('service/{service}', [Service::class, 'update'])->name('serviceUpdate');
+        Route::delete('service/{service}', [Service::class, 'destroy'])->name('serviceDelete');
     });
 });

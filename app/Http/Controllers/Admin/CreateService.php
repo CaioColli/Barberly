@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class AdminAddService extends Controller
+use App\Models\Service;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreServiceRequest;
+
+class CreateService extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,9 +30,17 @@ class AdminAddService extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
-        //
+        $path = $request->file('file')->store('services/services_images', 'public');
+
+        Service::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'path' => $path,
+        ]);
+
+        return to_route('services');
     }
 
     /**

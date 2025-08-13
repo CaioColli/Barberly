@@ -77,7 +77,7 @@ const AdminDashboard = () => {
                             <li>
                                 <Link href="/dashboard">
                                     <Button className={fullWidth}>
-                                        Editar horários de serviço
+                                        Adicionar ou Editar horários de serviço
                                     </Button>
                                 </Link>
                             </li>

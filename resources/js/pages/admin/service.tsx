@@ -163,7 +163,7 @@ const Service = () => {
 
                         <Button type="submit">
                             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                            Cadastrar serviço
+                            Editar serviço
                         </Button>
 
                     </div>

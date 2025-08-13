@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Service;
+use App\Models\Service as ServiceModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ServiceController extends Controller
+class Service extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $services = Service::all()->map(function ($service) {
+        $services = ServiceModel::all()->map(function ($service) {
             $service->path = asset('storage/' . $service->path);
 
             return $service;
@@ -38,24 +38,16 @@ class ServiceController extends Controller
      */
     public function store(StoreServiceRequest $request)
     {
-        $path = $request->file('file')->store('services/services_images', 'public');
-
-        Service::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'path' => $path,
-        ]);
-
-        return to_route('services');
+        //
     }
 
 
     /**
      * Display the specified resource.
      */
-    public function show(Service $service)
+    public function show(ServiceModel $service)
     {
-        $service = Service::find($service->id);
+        $service = ServiceModel::find($service->id);
         $service->path = asset('storage/' . $service->path);
 
         return Inertia::render('admin/service')->with('service', $service);
@@ -72,7 +64,7 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateServiceRequest $request, Service $service)
+    public function update(UpdateServiceRequest $request, ServiceModel $service)
     {
         $service->name = $request->name ?? $service->name;
         $service->price = $request->price ?? $service->price;
@@ -94,7 +86,7 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Service $service)
+    public function destroy(ServiceModel $service)
     {
         $pathImage = $service->path;
         unlink(public_path('storage/' . $pathImage));
