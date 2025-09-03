@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 use App\Http\Controllers\Controller;
+
+use Inertia\Inertia;
+
+use App\Http\Requests\StoreOpeningHours;
+use App\Models\Operation;
 
 class OpeningHours extends Controller
 {
@@ -28,9 +32,15 @@ class OpeningHours extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreOpeningHours $request)
     {
-        //
+        Operation::create([
+            'dayOpen' => $request->dayOpen,
+            'dayClose' => $request->dayClose,
+            'open' => $request->open,
+            'close' => $request->close,
+            'interval' => $request->interval
+        ]);
     }
 
     /**

@@ -24,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::prefix('openingHours')->group(function () {
             Route::get('', [OpeningHours::class, 'index'])->name('openingHours'); 
+            Route::post('', [OpeningHours::class, 'store'])->name('createOpeningHours'); 
         });
     });
 });
