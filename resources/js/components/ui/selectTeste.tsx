@@ -1,13 +1,15 @@
 
 
 type SelectProps = {
+    value?: string
     children: React.ReactNode,
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-const Select = ({ children, onChange }: SelectProps) => {
+const Select = ({ value, children, onChange }: SelectProps) => {
     return (
         <select
+            value={value}
             defaultValue=""
             onChange={onChange}
             required

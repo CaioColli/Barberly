@@ -5,8 +5,9 @@ import { Label } from "./ui/label"
 import { Input } from "./ui/input"
 import { LoaderCircle } from "lucide-react"
 
-import { useForm } from "@inertiajs/react";
-import FormModal from "./ui/modal"
+import { router, useForm, usePage } from "@inertiajs/react";
+
+import Modal from "./ui/modal"
 import { Button } from "./ui/teste.button"
 import Select from "./ui/selectTeste"
 
@@ -23,28 +24,59 @@ type OpeningHoursModalProps = {
     onClose: () => void
 }
 
+interface operation {
+    id: number
+    dayOpen: string
+    dayClose: string
+    open: string
+    close: string
+    interval: string
+}
+
 const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
+    const { operations } = usePage().props as unknown as { operations: operation[] }
+
+    const [operation] = operations;
+
+    console.log(operation)
+
     const { data, setData, post, processing, errors, reset } = useForm<FormModalData>({
-        dayOpen: '',
-        dayClose: '',
-        open: '',
-        close: '',
-        interval: ''
+        dayOpen: operation ? operation.dayOpen : '',
+        dayClose: operation ? operation.dayClose : '',
+        open: operation ? operation.open : '',
+        close: operation ? operation.close : '',
+        interval: operation ? operation.interval : ''
     });
 
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post('/admin/openingHours', {
-            onSuccess: () => {
-                reset();
-                onClose();
-            },
-            onError: () => {
-                console.log(errors)
-            }
-        });
+
+        if (operation) {
+            post(`/admin/openingHours/${operation.id}`, {
+                onSuccess: () => {
+                    reset();
+                    onClose();
+                    router.visit('openingHours')
+                },
+                onError: () => {
+                    console.log(errors)
+                }
+            })
+        } else {
+            post('/admin/openingHours', {
+                onSuccess: () => {
+                    reset();
+                    onClose();
+                    router.visit('openingHours');
+                },
+                onError: () => {
+                    console.log(errors)
+                }
+            });
+        }
+
 
     }
 
@@ -59,7 +91,10 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
     ];
 
     return (
-        <FormModal modalTitle="Programar funcionamento" onOpen={onOpen} onClose={onClose}>
+        <Modal
+            modalTitle={operation ? 'Reprogramar funcionamento' : 'Programar funcionamento'}
+            onOpen={onOpen} onClose={onClose}
+        >
             <Form onSubmit={submit}>
                 <div className="flex flex-col gap-6">
 
@@ -72,7 +107,10 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                                     De:
                                 </Label>
 
-                                <Select onChange={(e) => setData('dayOpen', e.target.value)}>
+                                <Select
+                                    onChange={(e) => setData('dayOpen', e.target.value)}
+                                    value={data.dayOpen}
+                                >
                                     <option value="" disabled hidden>
                                         Selecione uma opção
                                     </option>
@@ -91,7 +129,10 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                                     Até:
                                 </Label>
 
-                                <Select onChange={(e) => setData('dayClose', e.target.value)}>
+                                <Select
+                                    onChange={(e) => setData('dayClose', e.target.value)}
+                                    value={data.dayClose}
+                                >
                                     <option value="" disabled hidden>
                                         Selecione uma opção
                                     </option>
@@ -176,7 +217,7 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                     </Button>
                 </div>
             </Form>
-        </FormModal>
+        </Modal>
     )
 }
 

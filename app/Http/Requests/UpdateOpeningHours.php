@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreOpeningHours extends FormRequest
+class UpdateOpeningHours extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,11 @@ class StoreOpeningHours extends FormRequest
     public function rules(): array
     {
         return [
-            'dayOpen' => 'required|string',
-            'dayClose' => 'required|string',
-            'open' => 'required|string',
-            'close' => 'required|string',
-            'interval' => 'required|integer|min:10|max:60'
+            'dayOpen' => 'string',
+            'dayClose' => 'string',
+            'open' => 'string',
+            'close' => 'string',
+            'interval' => 'integer|min:10|max:60'
         ];
     }
 }

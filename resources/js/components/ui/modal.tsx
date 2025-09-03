@@ -7,7 +7,7 @@ interface ModalProps {
     children: React.ReactNode
 }
 
-const FormModal = ({ onOpen, onClose, modalTitle, children }: ModalProps) => {
+const Modal = ({ onOpen, onClose, modalTitle, children }: ModalProps) => {
     const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -38,4 +38,4 @@ const FormModal = ({ onOpen, onClose, modalTitle, children }: ModalProps) => {
     )
 }
 
-export default FormModal;
+export default Modal;

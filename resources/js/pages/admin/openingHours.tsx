@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Head, Link, router } from "@inertiajs/react";
+import { Head, Link, router, usePage } from "@inertiajs/react";
 
 import { BreadcrumbItem } from "@/types";
 
@@ -8,6 +8,8 @@ import AppLayout from "@/layouts/app-layout";
 import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/ui/footer";
 import Operation from "@/components/operation";
+import { removeSeconds } from "@/helpers/removeSeconds";
+import { removeDayFullName } from "@/helpers/removeDataFullName";
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -15,7 +17,25 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: '/admin/openingHours',
     }
 ]
+
+interface operation {
+    dayOpen: string
+    dayClose: string
+    open: string
+    close: string
+}
 const OpeningHours = () => {
+    const { operations } = usePage().props as unknown as { operations: operation[] }
+
+    const [operation] = operations
+
+    console.log(operation)
+
+    const dayOpen = operation ? removeDayFullName(operation.dayOpen) : undefined;
+    const dayClose = operation ? removeDayFullName(operation.dayClose) : undefined;
+    const openTime = operation ? removeSeconds(operation.open) : undefined;
+    const closeTime = operation ? removeSeconds(operation.close) : undefined;
+
     const [modal, setModal] = useState<"operation" | "closingDaysModal" | null>(null)
 
     const fullWidthStyle = 'w-full'
@@ -36,10 +56,16 @@ const OpeningHours = () => {
 
                     <div className="flex flex-col gap-0">
                         <span className="text-2xl text-[var(--custom-orange)]">
-                            Seg - Sab
+                            {operation
+                                ? ` ${dayOpen} - ${dayClose}`
+                                : 'Nenhuma dia cadastrado'
+                            }
                         </span>
                         <span className="text-2xl">
-                            08:00 - 17:30
+                            {operation
+                                ? `${openTime} - ${closeTime}`
+                                : 'Nenhum horário cadastrado'
+                            }
                         </span>
                     </div>
                 </header>
@@ -47,7 +73,10 @@ const OpeningHours = () => {
                 <ul className="flex flex-col gap-2 mt-6">
                     <li>
                         <Button className={fullWidthStyle} onClick={() => setModal("operation")}>
-                            Programar funcionamento
+                            {operation
+                                ? 'Reprogramar funcionamento'
+                                : 'Programar funcionamento'
+                            }
                         </Button>
                     </li>
                     <li>

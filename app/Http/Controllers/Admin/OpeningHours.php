@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 
 use App\Http\Requests\StoreOpeningHours;
+use App\Http\Requests\UpdateOpeningHours;
 use App\Models\Operation;
 
 class OpeningHours extends Controller
@@ -18,7 +19,11 @@ class OpeningHours extends Controller
      */
     public function index()
     {
-        return Inertia::render('admin/openingHours');
+        $operations = Operation::all();
+
+        return Inertia::render('admin/openingHours', [
+            'operations' => $operations
+        ]);
     }
 
     /**
@@ -62,9 +67,15 @@ class OpeningHours extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateOpeningHours $request, Operation $operation)
     {
-        //
+        $operation->dayOpen = $request->dayOpen ?? $operation->dayOpen;
+        $operation->dayClose = $request->dayClose ?? $operation->dayClose;
+        $operation->open = $request->open ?? $operation->open;
+        $operation->close = $request->close ?? $operation->close;
+        $operation->interval = $request->interval ?? $operation->interval;
+
+        $operation->save();
     }
 
     /**
