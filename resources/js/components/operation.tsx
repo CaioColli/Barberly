@@ -1,15 +1,15 @@
 import { FormEventHandler } from "react"
 
+import { router, useForm, usePage } from "@inertiajs/react";
+
+import { LoaderCircle } from "lucide-react"
+
 import { Form } from "./form"
 import { Label } from "./ui/label"
 import { Input } from "./ui/input"
-import { LoaderCircle } from "lucide-react"
-
-import { router, useForm, usePage } from "@inertiajs/react";
-
+import Select from "./ui/selectTeste"
 import Modal from "./ui/modal"
 import { Button } from "./ui/teste.button"
-import Select from "./ui/selectTeste"
 
 type FormModalData = {
     dayOpen: string,
@@ -37,8 +37,6 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
     const { operations } = usePage().props as unknown as { operations: operation[] }
 
     const [operation] = operations;
-
-    console.log(operation)
 
     const { data, setData, post, processing, errors, reset } = useForm<FormModalData>({
         dayOpen: operation ? operation.dayOpen : '',
@@ -93,7 +91,8 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
     return (
         <Modal
             modalTitle={operation ? 'Reprogramar funcionamento' : 'Programar funcionamento'}
-            onOpen={onOpen} onClose={onClose}
+            onOpen={onOpen} 
+            onClose={onClose}
         >
             <Form onSubmit={submit}>
                 <div className="flex flex-col gap-6">

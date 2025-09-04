@@ -10,6 +10,7 @@ import { Footer } from "@/components/ui/footer";
 import Operation from "@/components/operation";
 import { removeSeconds } from "@/helpers/removeSeconds";
 import { removeDayFullName } from "@/helpers/removeDataFullName";
+import ClosingDays from "@/components/closingDays";
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -36,7 +37,7 @@ const OpeningHours = () => {
     const openTime = operation ? removeSeconds(operation.open) : undefined;
     const closeTime = operation ? removeSeconds(operation.close) : undefined;
 
-    const [modal, setModal] = useState<"operation" | "closingDaysModal" | null>(null)
+    const [modal, setModal] = useState<"operation" | "closingDays" | null>(null)
 
     const fullWidthStyle = 'w-full'
 
@@ -80,7 +81,7 @@ const OpeningHours = () => {
                         </Button>
                     </li>
                     <li>
-                        <Button className={fullWidthStyle} onClick={() => setModal("closingDaysModal")}>
+                        <Button className={fullWidthStyle} onClick={() => setModal("closingDays")}>
                             Programar fechamento
                         </Button>
                     </li>
@@ -88,6 +89,7 @@ const OpeningHours = () => {
             </section>
 
             <Operation onOpen={modal === "operation"} onClose={() => setModal(null)} />
+            <ClosingDays onOpen={modal === "closingDays"} onClose={() => setModal(null)} />
             <Footer />
         </AppLayout>
     )
