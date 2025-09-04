@@ -5,11 +5,11 @@ import Badge from '@mui/material/Badge';
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import { ptBR } from 'date-fns/locale';
 import { format } from "date-fns";
+import { usePage } from '@inertiajs/react';
 
 type CalendarProps = {
     atualDate?: Date | null
     essentialContent?: boolean
-    closed?: string[]
     onDateChange?: (date: string | null) => void
 }
 
@@ -18,8 +18,8 @@ type CustomDayProps = PickersDayProps & {
     few?: Date[];
 };
 
-const Calendar = ({ essentialContent = true, atualDate, closed, onDateChange }: CalendarProps) => {
-    // const [selectedDate, setSelectedDate] = useState<Date | null>();
+const Calendar = ({ essentialContent = true, atualDate, onDateChange }: CalendarProps) => {
+    const { closingDays } = usePage().props
 
     const rawOut = [
         { day: 2, month: 6, year: 2025 },
@@ -34,6 +34,12 @@ const Calendar = ({ essentialContent = true, atualDate, closed, onDateChange }: 
         { day: 12, month: 7, year: 2025 },
     ];
 
+    const rawClosed = [
+        { weekday: 'Domingo' },
+    ];
+
+    const closed = rawClosed.map((({ weekday }) => weekday));
+
     const weekDayMap = {
         'Domingo': 0,
         'Segunda-feira': 1,
@@ -44,11 +50,7 @@ const Calendar = ({ essentialContent = true, atualDate, closed, onDateChange }: 
         'Sábado': 6
     } as { [key: string]: number };
 
-
-    const disabledDays = closed
-        ? closed.map(day => weekDayMap[day])
-        : []
-
+    const disabledDays = closed.map(day => weekDayMap[day]);
 
     const apparence = localStorage.getItem('appearance') as 'system' | 'light' | 'dark';
 
@@ -142,7 +144,6 @@ const Calendar = ({ essentialContent = true, atualDate, closed, onDateChange }: 
                             }
                         }
                     }}
-
 
                     slots={{
                         day: ServerDay,

@@ -52,11 +52,11 @@ const ClosingDays = ({ onOpen, onClose }: OpeningHoursModalProps) => {
             <Form onSubmit={submit}>
                 <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-4">
-                        <h2 className="text-2xl text-[var(--custom-black)]">Defina o dia e horários para o fechamento</h2>
+                        <h2 className="text-2xl text-secondary">Defina o dia e horários para o fechamento</h2>
 
                         <div className="flex gap-4 w-full">
                             <div className="flex flex-col gap-2 flex-1">
-                                <Label htmlFor="open">
+                                <Label className="text-secondary" htmlFor="open">
                                     Selecione o dia
                                 </Label>
 
@@ -72,7 +72,7 @@ const ClosingDays = ({ onOpen, onClose }: OpeningHoursModalProps) => {
 
                         <div className="flex flex-col gap-4 w-full">
                             <div className="flex flex-col gap-2">
-                                <h2 className="text-2xl text-[var(--custom-black)]">Defina os horários de funcionamento
+                                <h2 className="text-2xl text-secondary">Defina os horários de funcionamento
                                     <span className="text-[16px] text-[var(--custom-dark-gray)]">
                                         (opcional)
                                     </span>
@@ -84,7 +84,7 @@ const ClosingDays = ({ onOpen, onClose }: OpeningHoursModalProps) => {
 
                             <div className="flex gap-4 w-full">
                                 <div className="flex flex-col gap-2 flex-1">
-                                    <Label htmlFor="open">
+                                    <Label className="text-secondary" htmlFor="open">
                                         De:
                                     </Label>
 
@@ -101,7 +101,7 @@ const ClosingDays = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                                 </div>
 
                                 <div className="flex flex-col gap-2 flex-1">
-                                    <Label htmlFor="open">
+                                    <Label className="text-secondary" htmlFor="open">
                                         De:
                                     </Label>
 
@@ -120,7 +120,7 @@ const ClosingDays = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                         </div>
                     </div>
 
-                    <Button type="submit">
+                    <Button className="text-primary bg-secondary" type="submit">
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                         Confirmar
                     </Button>

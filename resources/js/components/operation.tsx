@@ -98,11 +98,11 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                 <div className="flex flex-col gap-6">
 
                     <div className="flex flex-col gap-4">
-                        <h2 className="text-2xl text-[var(--custom-black)]">Defina os dias de funcionamento</h2>
+                        <h2 className="text-2xl text-secondary">Defina os dias de funcionamento</h2>
 
                         <div className="flex gap-4 w-full">
                             <div className="flex flex-col gap-2 flex-1">
-                                <Label htmlFor="open">
+                                <Label className="text-secondary" htmlFor="open">
                                     De:
                                 </Label>
 
@@ -124,7 +124,7 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                             </div>
 
                             <div className="flex flex-col gap-2 flex-1">
-                                <Label htmlFor="open">
+                                <Label className="text-secondary" htmlFor="open">
                                     Até:
                                 </Label>
 
@@ -148,10 +148,10 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                     </div>
 
                     <div className="flex flex-col gap-4">
-                        <h2 className="text-2xl text-[var(--custom-black)]">Defina os horários de funcionamento</h2>
+                        <h2 className="text-2xl text-secondary">Defina os horários de funcionamento</h2>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="open">
+                            <Label className="text-secondary" htmlFor="open">
                                 De:
                             </Label>
 
@@ -170,7 +170,7 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="close">
+                            <Label className="text-secondary" htmlFor="close">
                                 Até:
                             </Label>
 
@@ -189,7 +189,7 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="interval">
+                            <Label className="text-secondary" htmlFor="interval">
                                 Intervalo entre os serviços:
                             </Label>
 
@@ -210,7 +210,7 @@ const Operation = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                     </div>
 
 
-                    <Button type="submit">
+                    <Button className="text-primary bg-secondary" type="submit">
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                         Confirmar
                     </Button>

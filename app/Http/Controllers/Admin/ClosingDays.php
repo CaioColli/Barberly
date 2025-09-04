@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Inertia\Inertia;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClosingDays;
 use App\Models\ClosingDays as ModelClosingDays;
 
 use Illuminate\Http\Request;
+
 class ClosingDays extends Controller
 {
     /**
