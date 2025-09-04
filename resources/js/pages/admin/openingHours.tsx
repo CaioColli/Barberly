@@ -30,8 +30,6 @@ const OpeningHours = () => {
 
     const [operation] = operations
 
-    console.log(operation)
-
     const dayOpen = operation ? removeDayFullName(operation.dayOpen) : undefined;
     const dayClose = operation ? removeDayFullName(operation.dayClose) : undefined;
     const openTime = operation ? removeSeconds(operation.open) : undefined;

@@ -4,15 +4,22 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import Badge from '@mui/material/Badge';
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import { ptBR } from 'date-fns/locale';
-import { useState } from 'react';
+import { format } from "date-fns";
+
+type CalendarProps = {
+    atualDate?: Date | null
+    essentialContent?: boolean
+    closed?: string[]
+    onDateChange?: (date: string | null) => void
+}
 
 type CustomDayProps = PickersDayProps & {
     out?: Date[];
     few?: Date[];
 };
 
-const Calendar = () => {
-    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+const Calendar = ({ essentialContent = true, atualDate, closed, onDateChange }: CalendarProps) => {
+    // const [selectedDate, setSelectedDate] = useState<Date | null>();
 
     const rawOut = [
         { day: 2, month: 6, year: 2025 },
@@ -27,12 +34,6 @@ const Calendar = () => {
         { day: 12, month: 7, year: 2025 },
     ];
 
-    const rawClosed = [
-        { weekday: 'Domingo' },
-    ];
-
-    const closed = rawClosed.map((({ weekday }) => weekday));
-
     const weekDayMap = {
         'Domingo': 0,
         'Segunda-feira': 1,
@@ -43,8 +44,11 @@ const Calendar = () => {
         'Sábado': 6
     } as { [key: string]: number };
 
-    // const disabledDays = closed.map(day => weekDayMap[day]);
-    const disabledDays = closed.map(day => weekDayMap[day]);
+
+    const disabledDays = closed
+        ? closed.map(day => weekDayMap[day])
+        : []
+
 
     const apparence = localStorage.getItem('appearance') as 'system' | 'light' | 'dark';
 
@@ -130,8 +134,15 @@ const Calendar = () => {
                 <DateCalendar
                     views={['day']}
 
-                    value={selectedDate}
-                    onChange={(date) => setSelectedDate(date)}
+                    value={atualDate}
+                    onChange={(date) => {
+                        if (onDateChange) {
+                            if (date) {
+                                onDateChange(format(date, 'dd/MM/yyyy', { locale: ptBR }));
+                            }
+                        }
+                    }}
+
 
                     slots={{
                         day: ServerDay,
@@ -195,20 +206,21 @@ const Calendar = () => {
                 />
             </LocalizationProvider>
 
-            <div className='flex gap-4'>
-                <div className='flex gap-2 items-center'>
-                    <span className='block w-2 h-2 bg-[var(--custom-orange)] rounded-4xl'></span>
-                    <span className='text-[14px]'>Poucos horários disponíveis</span>
-                </div>
+            {essentialContent && (
+                <div className='flex gap-4'>
+                    <div className='flex gap-2 items-center'>
+                        <span className='block w-2 h-2 bg-[var(--custom-orange)] rounded-4xl'></span>
+                        <span className='text-[14px]'>Poucos horários disponíveis</span>
+                    </div>
 
-                <div className='flex gap-2 items-center'>
-                    <span className='block w-2 h-2 bg-[var(--custom-red)] rounded-4xl'></span>
-                    <span className='text-[14px]'>Sem horários disponíveis</span>
+                    <div className='flex gap-2 items-center'>
+                        <span className='block w-2 h-2 bg-[var(--custom-red)] rounded-4xl'></span>
+                        <span className='text-[14px]'>Sem horários disponíveis</span>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     )
 }
-
 
 export default Calendar;

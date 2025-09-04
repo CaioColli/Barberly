@@ -4,11 +4,12 @@ import { useForm } from "@inertiajs/react";
 
 import { Form } from "./form";
 import Modal from "./ui/modal";
-import Select from "./ui/selectTeste";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/teste.button";
 import { LoaderCircle } from "lucide-react";
+import Calendar from "./ui/calendar";
+
 
 type FormData = {
     day: string,
@@ -22,27 +23,16 @@ type OpeningHoursModalProps = {
 }
 
 const ClosingDays = ({ onOpen, onClose }: OpeningHoursModalProps) => {
-
     const { data, setData, post, processing, errors, reset } = useForm<FormData>({
         day: '',
         initialHour: '',
         finalHour: ''
     });
 
-    const daysInWeek = [
-        'Domingo',
-        'Segunda-feira',
-        'Terça-feira',
-        'Quarta-feira',
-        'Quinta-feira',
-        'Sexta-feira',
-        'Sábado'
-    ];
-
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post('', {
+        post('/admin/closingDays', {
             onSuccess: () => {
                 reset();
                 onClose();
@@ -70,20 +60,12 @@ const ClosingDays = ({ onOpen, onClose }: OpeningHoursModalProps) => {
                                     Selecione o dia
                                 </Label>
 
-                                <Select
-                                    onChange={(e) => setData('day', e.target.value)}
-                                    value={data.day}
-                                >
-                                    <option value="" disabled hidden>
-                                        Selecione uma opção
-                                    </option>
-                                    {daysInWeek.map((day, index) => (
-                                        <option key={index} value={day}>
-                                            {day}
-                                        </option>
-                                    ))}
-                                </Select>
-
+                                <div className="p-2 rounded-2xl bg-background-primary w-fit">
+                                    <Calendar
+                                        essentialContent={false}
+                                        onDateChange={(date) => setData('day', date || '')}
+                                    />
+                                </div>
                                 <span className="text-[16px] text-[var(--custom-red)]">{errors.day}</span>
                             </div>
                         </div>

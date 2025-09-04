@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\Admin\CreateService;
 use App\Http\Controllers\Admin\Service;
 use App\Http\Controllers\Admin\OpeningHours;
+use App\Http\Controllers\Admin\ClosingDays;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -23,9 +24,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('service/{service}', [Service::class, 'destroy'])->name('serviceDelete');
 
         Route::prefix('openingHours')->group(function () {
-            Route::get('', [OpeningHours::class, 'index'])->name('openingHours'); 
-            Route::post('', [OpeningHours::class, 'store'])->name('openingHoursCreate'); 
-            Route::post('/{operation}', [OpeningHours::class, 'update'])->name('openingHoursUpdate'); 
+            Route::get('', [OpeningHours::class, 'index'])->name('openingHours');
+            Route::post('', [OpeningHours::class, 'store'])->name('openingHoursCreate');
+            Route::post('/{operation}', [OpeningHours::class, 'update'])->name('openingHoursUpdate');
+        });
+
+        Route::prefix('closingDays')->group(function () {
+            Route::post('', [ClosingDays::class, 'store'])->name('closingDaysCreate');
+            // Route::post('', [ClosingDays::class, 'update'])->name('closingDaysUpdate');
         });
     });
 });
