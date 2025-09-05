@@ -23,8 +23,8 @@ class StoreClosingDays extends FormRequest
     {
         return [
             'day' => 'required|string',
-            'initialHour' => 'required|string',
-            'finalHour' => 'required|string'
+            'initialHour' => 'nullable|string',
+            'finalHour' => 'nullable|string'
         ];
     }
 }

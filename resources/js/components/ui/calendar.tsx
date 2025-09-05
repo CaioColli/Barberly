@@ -6,11 +6,12 @@ import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import { ptBR } from 'date-fns/locale';
 import { format } from "date-fns";
 import { usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 type CalendarProps = {
-    atualDate?: Date | null
+    atualDate?: Date | null | boolean
     essentialContent?: boolean
-    onDateChange?: (date: string | null) => void
+    onDateChange?: (date: string | null) => void | Date
 }
 
 type CustomDayProps = PickersDayProps & {
@@ -18,8 +19,28 @@ type CustomDayProps = PickersDayProps & {
     few?: Date[];
 };
 
+type ClosingDay = {
+    id: number;
+    day: string;
+    initialHour: string | null;
+    finalHour: string | null;
+};
+
 const Calendar = ({ essentialContent = true, atualDate, onDateChange }: CalendarProps) => {
-    const { closingDays } = usePage().props
+    const { closingDays } = usePage().props as unknown as { closingDays: ClosingDay[] };
+    // const { operationHours } = usePage().props;
+
+    const [date, setDate] = useState<Date | null>(null);
+
+    useEffect(() => {
+        if (atualDate) {
+            setDate(new Date());
+        }
+    }, [atualDate])
+
+    const daysToClose = closingDays
+        .filter(item => item.initialHour !== null && item.finalHour !== null)
+        .map(item => item.day)
 
     const rawOut = [
         { day: 2, month: 6, year: 2025 },
@@ -136,7 +157,7 @@ const Calendar = ({ essentialContent = true, atualDate, onDateChange }: Calendar
                 <DateCalendar
                     views={['day']}
 
-                    value={atualDate}
+                    value={date}
                     onChange={(date) => {
                         if (onDateChange) {
                             if (date) {
@@ -150,7 +171,15 @@ const Calendar = ({ essentialContent = true, atualDate, onDateChange }: Calendar
                     }}
 
                     shouldDisableDate={(date) => {
-                        return disabledDays.includes(date.getDay());
+                        if (disabledDays.includes(date.getDay())) return true
+
+                        if (daysToClose.some(dayString => {
+                            const [day, month, year] = dayString.split('/').map(Number);
+                            const closingDate = new Date(year, month - 1, day);
+                            return isSameDay(date, closingDate);
+                        })) return true;
+
+                        return false;
                     }}
 
                     // Estilização componentes internos / Marcações

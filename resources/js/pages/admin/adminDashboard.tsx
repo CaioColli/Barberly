@@ -35,6 +35,8 @@ const AdminDashboard = () => {
 
     takeDate();
 
+    // const atualDate = new Date()
+    
     const fullWidth = 'w-full'
 
     return (
@@ -54,7 +56,10 @@ const AdminDashboard = () => {
                 <main className="mt-6 flex flex-col gap-6">
                     <div className="flex flex-col gap-4 pb-4">
                         <h2 className="text-2xl text-[var(--custom-orange)]">Agenda</h2>
-                        <Calendar />
+                        <Calendar
+                            essentialContent={false}
+                            atualDate
+                        />
                         <h2 className='text-[20px]'>Horários agendados</h2>
                     </div>
 

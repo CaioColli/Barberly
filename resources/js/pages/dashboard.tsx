@@ -71,7 +71,9 @@ export default function Dashboard() {
 
                 {selectedGuide === 'agenda' && (
                     <form className='flex flex-col gap-4'>
-                        <Calendar />
+                        <Calendar
+                            atualDate
+                        />
                         <h2 className='text-[20px]'>Horários disponíveis</h2>
                     </form>
 

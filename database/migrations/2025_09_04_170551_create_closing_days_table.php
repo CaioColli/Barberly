@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('closing_days', function (Blueprint $table) {
             $table->id();
             $table->string('day');
-            $table->time('initialHour');
-            $table->time('finalHour');
+            $table->time('initialHour')->nullable();
+            $table->time('finalHour')->nullable();
             $table->timestamps();
         });
     }
